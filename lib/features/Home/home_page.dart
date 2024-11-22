@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     });
     return Scaffold(
       body: Consumer<HomeProvider>(
-        builder: (context, homeProvider, child) {
+        builder: (context, homeProvider, _) {
           if (homeProvider.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
             );
           }
           final home = homeProvider.gamifikasiApi!;
-          final progress = homeProvider.progressApi!;
+          final progress = homeProvider.progressApi;
           return SingleChildScrollView(
               child: Column(
             children: [
@@ -41,9 +41,9 @@ class HomePage extends StatelessWidget {
                   home.level.toString(),
                   home.totalPoints.toString(),
                   home.currentExp! / home.nextLevelExp!,
-                  progress.lesson ?? '',
-                  progress.status ?? '',
-                  (progress.progressPercentage ?? 0).toDouble()),
+                  progress?.lesson ?? '',
+                  progress?.status ?? '',
+                  (progress?.progressPercentage ?? 0).toDouble()),
               ElevatedButton(
                   onPressed: () {
                     homeProvider.removeToken();
@@ -243,23 +243,14 @@ class HomePage extends StatelessWidget {
               // Jika layar kecil, gunakan kolom dengan ruang terbatas
               if (isSmallScreen) ...[
                 _buildCourseImage("assets/images/Property 1=Speaking.png"),
-                const SizedBox(height: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       _buildOngoingLabel(label),
                       const SizedBox(height: 5.0),
-                      Text(
-                        title,
-                        style: TextStyle(
-                          color: Warna.netral1,
-                          fontSize: 16, // Sesuaikan ukuran font
-                        ),
-                        overflow:
-                            TextOverflow.ellipsis, // Jika teks terlalu panjang
-                        maxLines: 2, // Membatasi jumlah baris
-                      ),
+                      Tipografi().S1(isiText: title, warnaFont: Warna.netral1)
                     ],
                   ),
                 ),
@@ -278,16 +269,8 @@ class HomePage extends StatelessWidget {
                         children: [
                           _buildOngoingLabel(label),
                           const SizedBox(height: 5.0),
-                          Text(
-                            title,
-                            style: TextStyle(
-                              color: Warna.netral1,
-                              fontSize: 16, // Sesuaikan ukuran font
-                            ),
-                            overflow: TextOverflow
-                                .ellipsis, // Jika teks terlalu panjang
-                            maxLines: 2, // Membatasi jumlah baris
-                          ),
+                          Tipografi()
+                              .S1(isiText: title, warnaFont: Warna.netral1)
                         ],
                       ),
                     ),
@@ -308,6 +291,7 @@ class HomePage extends StatelessWidget {
   Widget _buildOngoingLabel(String label) {
     return Container(
       height: 22,
+      width: 100,
       alignment: Alignment.center,
       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
       decoration: BoxDecoration(

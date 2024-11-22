@@ -22,8 +22,7 @@ class LessonPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title:
-            Tipografi().S1(isiText: 'Lesson Page', warnaFont: Warna.primary1),
+        title: Tipografi().S1(isiText: 'Lesson Page', warnaFont: Warna.primary1),
         backgroundColor: Warna.primary3,
         iconTheme: const IconThemeData(color: Warna.primary1),
       ),
@@ -66,8 +65,7 @@ class LessonPage extends StatelessWidget {
                           const SizedBox(
                             width: 11,
                           ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                          Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -95,8 +93,7 @@ class LessonPage extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    SizedBox(
-                                      width: 136,
+                                    Expanded(
                                       child: LinearPercentIndicator(
                                         padding: const EdgeInsets.all(0),
                                         barRadius: const Radius.circular(8),
@@ -124,8 +121,7 @@ class LessonPage extends StatelessWidget {
                 ),
                 Container(
                   width: double.maxFinite,
-                  padding:
-                      const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+                  padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -157,12 +153,6 @@ class LessonPage extends StatelessWidget {
                       } else if (index == 2) {
                         return selectedLesson(
                           navigasi: () async {
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   '/summary',
-                            //   arguments: lesson.summary!.summaryId,
-                            // );
-
                             final result = await Navigator.pushNamed(
                               context,
                               '/summary',
@@ -248,6 +238,7 @@ class LessonPage extends StatelessWidget {
                       color: Warna.netral1.withOpacity(0.1),
                     ),
                   ]),
+
               margin: const EdgeInsets.only(bottom: 20),
               child: Row(
                 children: [
@@ -276,7 +267,6 @@ class LessonPage extends StatelessWidget {
                           height: 5,
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
                               children: [

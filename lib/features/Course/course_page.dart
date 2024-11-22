@@ -106,8 +106,8 @@ class _CoursePageState extends State<CoursePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset("assets/images/Group 140.png",
-                  width: 100), // Adjust width for responsiveness
-              const SizedBox(width: 10), // Adjust spacing for smaller screens
+                  width: 100),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

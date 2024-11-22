@@ -1,4 +1,6 @@
 import 'package:apps_skripsi/core/utils/shared_preferences.dart';
+import 'package:apps_skripsi/features/Analysis/analysis_page.dart';
+import 'package:apps_skripsi/features/Analysis/analysisi_detail_page.dart';
 import 'package:apps_skripsi/features/Course/course_page.dart';
 import 'package:apps_skripsi/features/Course/course_provider.dart';
 import 'package:apps_skripsi/features/Daily-Event/daily_page.dart';
@@ -15,6 +17,7 @@ import 'package:apps_skripsi/features/Lesson/lesson_page.dart';
 import 'package:apps_skripsi/features/Lesson/lesson_provider.dart';
 import 'package:apps_skripsi/features/Register/register_page.dart';
 import 'package:apps_skripsi/features/Register/register_provider.dart';
+import 'package:apps_skripsi/features/Talk-AI/talk_provider.dart';
 import 'package:apps_skripsi/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +44,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => LessonProvider()),
         ChangeNotifierProvider(create: (_) => VideoProvider()),
         ChangeNotifierProvider(create: (_) => ExerciseProvider()),
-        ChangeNotifierProvider(create: (_) => SummaryProvider())
+        ChangeNotifierProvider(create: (_) => SummaryProvider()),
+        ChangeNotifierProvider(create: (_) => TalkProvider())
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -56,10 +60,11 @@ class MyApp extends StatelessWidget {
           '/summary': (context) => const SummaryPage(),
           '/excercise-detail': (context) => const ExcerciseDetail(),
           '/daily-event': (context) => const DailyPage(),
-          '/wrapper': (context) => const Wrapper()
+          '/wrapper': (context) => const Wrapper(),
+          '/analysis-detail': (context) => const AnalysisiDetailPage()
         },
         debugShowCheckedModeBanner: false,
-        home: const AuthCheck(),
+        home: const AnalysisPage(),
       ),
     );
   }
