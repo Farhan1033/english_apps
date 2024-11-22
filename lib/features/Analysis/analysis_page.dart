@@ -277,7 +277,9 @@ class AnalysisPage extends StatelessWidget {
               child: Tombol().TextLarge(
                   teksTombol: 'See Detail >>',
                   lebarTombol: double.infinity,
-                  navigasiTombol: () {}),
+                  navigasiTombol: () {
+                    Navigator.pushNamed(context, '/analysis-detail');
+                  }),
             );
           } else {
             return Container();

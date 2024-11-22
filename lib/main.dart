@@ -1,4 +1,5 @@
 import 'package:apps_skripsi/core/utils/shared_preferences.dart';
+import 'package:apps_skripsi/features/Analysis/analysis_detail_provider.dart';
 import 'package:apps_skripsi/features/Analysis/analysis_page.dart';
 import 'package:apps_skripsi/features/Analysis/analysisi_detail_page.dart';
 import 'package:apps_skripsi/features/Course/course_page.dart';
@@ -45,7 +46,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VideoProvider()),
         ChangeNotifierProvider(create: (_) => ExerciseProvider()),
         ChangeNotifierProvider(create: (_) => SummaryProvider()),
-        ChangeNotifierProvider(create: (_) => TalkProvider())
+        ChangeNotifierProvider(create: (_) => TalkProvider()),
+        ChangeNotifierProvider(create: (_) => AnalysisDetailProvider())
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -61,7 +63,7 @@ class MyApp extends StatelessWidget {
           '/excercise-detail': (context) => const ExcerciseDetail(),
           '/daily-event': (context) => const DailyPage(),
           '/wrapper': (context) => const Wrapper(),
-          '/analysis-detail': (context) => const AnalysisiDetailPage()
+          '/analysis-detail': (context) => const AnalysisDetailPage()
         },
         debugShowCheckedModeBanner: false,
         home: const AnalysisPage(),
