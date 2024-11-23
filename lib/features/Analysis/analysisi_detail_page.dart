@@ -32,44 +32,38 @@ class AnalysisDetailPage extends StatelessWidget {
           if (analysisDetailProvider.analysisDetailApi == null) {
             return const Center(child: Text('Data not found!'));
           }
-          return Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
-              child: ListView.builder(
-                itemCount:
-                    analysisDetailProvider.analysisDetailApi!.data!.length,
-                itemBuilder: (context, index) {
-                  final item =
-                      analysisDetailProvider.analysisDetailApi!.data![index];
-                  if (index == 0) {
-                    return _buildAnalysisCategory(
-                        context, item, 'assets/images/Component 1.png');
-                  } else if (index == 1) {
-                    return _buildAnalysisCategory(
-                        context, item, 'assets/images/Property 1=Writting.png');
-                  } else if (index == 2) {
-                    return _buildAnalysisCategory(context, item,
-                        'assets/images/Property 1=Listening.png');
-                  } else if (index == 3) {
-                    return _buildAnalysisCategory(
-                        context, item, 'assets/images/Property 1=Reading.png');
-                  } else {
-                    return Container();
-                  }
-                },
-              ));
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+            child: ListView.builder(
+              itemCount: analysisDetailProvider.analysisDetailApi!.data!.length,
+              itemBuilder: (context, index) {
+                final item =
+                    analysisDetailProvider.analysisDetailApi!.data![index];
+                final imagePaths = [
+                  'assets/images/Component 1.png',
+                  'assets/images/Property 1=Writting.png',
+                  'assets/images/Property 1=Listening.png',
+                  'assets/images/Property 1=Reading.png',
+                ];
+                if (index < imagePaths.length) {
+                  return _buildAnalysisCategory(
+                      context, item, imagePaths[index]);
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
+          );
         },
       ),
     );
   }
 
-  Container _buildAnalysisCategory(
+  Widget _buildAnalysisCategory(
       BuildContext context, Data item, String imageCourse) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(20),
-      width: double.maxFinite,
+      margin: const EdgeInsets.only(bottom: 15),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Warna.primary1,
         borderRadius: BorderRadius.circular(8),
@@ -81,12 +75,6 @@ class AnalysisDetailPage extends StatelessWidget {
             color: Warna.netral1.withOpacity(0.07),
           ),
           BoxShadow(
-            blurRadius: 1.0,
-            offset: const Offset(0, 3),
-            spreadRadius: 0.0,
-            color: Warna.netral1.withOpacity(0.06),
-          ),
-          BoxShadow(
             blurRadius: 10.0,
             offset: const Offset(0, 1),
             spreadRadius: 0.0,
@@ -95,11 +83,12 @@ class AnalysisDetailPage extends StatelessWidget {
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildRowContent(context, item, imageCourse),
+          const SizedBox(height: 10),
           Tipografi().S1(isiText: 'Skill Level', warnaFont: Warna.netral1),
+          const SizedBox(height: 5),
           _buildColumnSkillLevel(context, item.progress ?? []),
         ],
       ),
@@ -109,85 +98,67 @@ class AnalysisDetailPage extends StatelessWidget {
   Widget _buildRowContent(
       BuildContext context, Data analysis, String imageCourse) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 81,
-          height: 88,
-          child: Image.asset(imageCourse),
+          width: MediaQuery.of(context).size.width * 0.2,
+          height: MediaQuery.of(context).size.width * 0.2,
+          child: Image.asset(imageCourse, fit: BoxFit.contain),
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.6,
+        const SizedBox(width: 10),
+        Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Tipografi()
                   .H6(isiText: analysis.course ?? '', warnaFont: Warna.netral1),
+              const SizedBox(height: 5),
               Tipografi().B2(
-                  isiText: analysis.description ?? '', warnaFont: Warna.netral1)
+                  isiText: analysis.description ?? '',
+                  warnaFont: Warna.netral1),
             ],
           ),
-        )
+        ),
       ],
     );
   }
 
   Widget _buildColumnSkillLevel(
       BuildContext context, List<Progress> progressList) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.15,
-      child: ListView.builder(
-        itemCount: progressList.length,
-        itemBuilder: (context, index) {
-          final item = progressList[index];
-          if (index == 0) {
-            return _bulildSkillLevel(
-                context, item.category ?? '', item.progressPercentage ?? 0);
-          } else if (index == 1) {
-            return _bulildSkillLevel(
-                context, item.category ?? '', item.progressPercentage ?? 0);
-          } else if (index == 2) {
-            return _bulildSkillLevel(
-                context, item.category ?? '', item.progressPercentage ?? 0);
-          } else {
-            return Container();
-          }
-        },
-      ),
+    return Column(
+      children: progressList.map((item) {
+        return _buildSkillLevel(
+            context, item.category ?? '', item.progressPercentage ?? 0);
+      }).toList(),
     );
   }
-}
 
-Container _bulildSkillLevel(
-    BuildContext context, String category, int progressPercentage) {
-  return Container(
-    margin: const EdgeInsets.only(bottom: 15),
-    width: double.maxFinite,
-    child: Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Tipografi().B2(isiText: category, warnaFont: Warna.netral1),
-            Tipografi().B2(
-                isiText: '${progressPercentage.toString()}%',
-                warnaFont: Warna.netral1),
-          ],
-        ),
-        SizedBox(
-          width: double.infinity,
-          child: LinearPercentIndicator(
+  Widget _buildSkillLevel(
+      BuildContext context, String category, int progressPercentage) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Tipografi().B2(isiText: category, warnaFont: Warna.netral1),
+              Tipografi().B2(
+                  isiText: '${progressPercentage.toString()}%',
+                  warnaFont: Warna.netral1),
+            ],
+          ),
+          const SizedBox(height: 5),
+          LinearPercentIndicator(
             padding: EdgeInsets.zero,
             barRadius: const Radius.circular(8),
             lineHeight: 6.0,
             percent: progressPercentage / 100,
-            width: MediaQuery.of(context).size.width * 0.8,
             progressColor: Warna.primary4,
             backgroundColor: Warna.primary2,
           ),
-        )
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }

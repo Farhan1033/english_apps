@@ -46,41 +46,51 @@ class _CoursePageState extends State<CoursePage> {
         onRefresh: () async {
           _fetchCourseData();
         },
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Consumer<CourseProvider>(
-                  builder: (context, courseProvider, child) {
-                if (courseProvider.isLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (courseProvider.errorMessage != null) {
-                  return Center(
-                    child: Text(
-                      courseProvider.errorMessage!,
-                      style: const TextStyle(color: Colors.red, fontSize: 16),
-                    ),
-                  );
-                }
-                if (courseProvider.course != null) {
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildHeader(courseProvider),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        _buildLessonList(courseProvider)
-                      ],
-                    ),
-                  );
-                }
-                return const Center(child: Text("No course data available"));
-              }),
-            ],
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(Duration(seconds: 2));
+
+            setState(() {
+              _fetchCourseData();
+            });
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Consumer<CourseProvider>(
+                    builder: (context, courseProvider, child) {
+                  if (courseProvider.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (courseProvider.errorMessage != null) {
+                    return Center(
+                      child: Text(
+                        courseProvider.errorMessage!,
+                        style: const TextStyle(color: Colors.red, fontSize: 16),
+                      ),
+                    );
+                  }
+                  if (courseProvider.course != null) {
+                    return SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildHeader(courseProvider),
+                          const SizedBox(
+                            height: 15,
+                          ),
+                          _buildLessonList(courseProvider)
+                        ],
+                      ),
+                    );
+                  }
+                  return const Center(child: Text("No course data available"));
+                }),
+              ],
+            ),
           ),
         ),
       ),
@@ -105,8 +115,7 @@ class _CoursePageState extends State<CoursePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset("assets/images/Group 140.png",
-                  width: 100),
+              Image.asset("assets/images/Group 140.png", width: 100),
               const SizedBox(width: 10),
               Expanded(
                 child: Column(

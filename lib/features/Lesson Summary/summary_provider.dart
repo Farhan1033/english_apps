@@ -45,13 +45,15 @@ class SummaryProvider with ChangeNotifier {
 
     try {
       final token = await Token().getToken();
-      final idLesson =
-          Provider.of<LessonProvider>(context, listen: false).idLesson;
+      final lesson = Provider.of<LessonProvider>(context, listen: false);
       final idCourse =
           Provider.of<CourseProvider>(context, listen: false).idCourses;
-      await _eventLessonModels.eventExcerciseCompleted(
-          token ?? '', idLesson, idCourse, 'summary');
-      // notifyListeners();
+      if (lesson.lessonApi!.summary!.isCompleted == false) {
+        await _eventLessonModels.eventExcerciseCompleted(
+            token ?? '', lesson.idLesson, idCourse, 'summary');
+      } else {
+        await summaryData(lesson.lessonApi!.summary!.summaryId!);
+      }
     } catch (e) {
       _errorMessage = e.toString();
     } finally {

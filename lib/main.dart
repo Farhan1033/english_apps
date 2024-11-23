@@ -1,6 +1,5 @@
 import 'package:apps_skripsi/core/utils/shared_preferences.dart';
 import 'package:apps_skripsi/features/Analysis/analysis_detail_provider.dart';
-import 'package:apps_skripsi/features/Analysis/analysis_page.dart';
 import 'package:apps_skripsi/features/Analysis/analysisi_detail_page.dart';
 import 'package:apps_skripsi/features/Course/course_page.dart';
 import 'package:apps_skripsi/features/Course/course_provider.dart';
@@ -66,7 +65,7 @@ class MyApp extends StatelessWidget {
           '/analysis-detail': (context) => const AnalysisDetailPage()
         },
         debugShowCheckedModeBanner: false,
-        home: const AnalysisPage(),
+        home: const AuthCheck(),
       ),
     );
   }

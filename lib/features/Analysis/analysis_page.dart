@@ -257,34 +257,35 @@ class AnalysisPage extends StatelessWidget {
   Widget _buildListSkillView(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.4,
-      height: MediaQuery.of(context).size.height * 0.25,
-      child: ListView.builder(
-        shrinkWrap: false,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return _buildColumnCategory(context, 'Speaking', 60);
-          } else if (index == 1) {
-            return _buildColumnCategory(context, 'Listening', 60);
-          } else if (index == 2) {
-            return _buildColumnCategory(context, 'Reading', 60);
-          } else if (index == 3) {
-            return _buildColumnCategory(context, 'Writing', 60);
-          } else if (index == 4) {
-            return Align(
-              alignment: Alignment.centerRight,
-              child: Tombol().TextLarge(
-                  teksTombol: 'See Detail >>',
-                  lebarTombol: double.infinity,
-                  navigasiTombol: () {
-                    Navigator.pushNamed(context, '/analysis-detail');
-                  }),
-            );
-          } else {
-            return Container();
-          }
-        },
+      height: MediaQuery.of(context).size.height * 0.5,
+      child: Expanded(
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return _buildColumnCategory(context, 'Speaking', 60);
+            } else if (index == 1) {
+              return _buildColumnCategory(context, 'Listening', 60);
+            } else if (index == 2) {
+              return _buildColumnCategory(context, 'Reading', 60);
+            } else if (index == 3) {
+              return _buildColumnCategory(context, 'Writing', 60);
+            } else if (index == 4) {
+              return Align(
+                alignment: Alignment.centerRight,
+                child: Tombol().TextLarge(
+                    teksTombol: 'See Detail >>',
+                    lebarTombol: double.infinity,
+                    navigasiTombol: () {
+                      Navigator.pushNamed(context, '/analysis-detail');
+                    }),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }
@@ -305,7 +306,7 @@ class AnalysisPage extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Container(
+          SizedBox(
             width: double.maxFinite,
             child: LinearPercentIndicator(
               padding: EdgeInsets.zero,

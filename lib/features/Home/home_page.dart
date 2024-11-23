@@ -33,26 +33,33 @@ class HomePage extends StatelessWidget {
           }
           final home = homeProvider.gamifikasiApi!;
           final progress = homeProvider.progressApi;
-          return SingleChildScrollView(
-              child: Column(
-            children: [
-              _buildHeader(
-                  context,
-                  home.level.toString(),
-                  home.totalPoints.toString(),
-                  home.currentExp! / home.nextLevelExp!,
-                  progress?.lesson ?? '',
-                  progress?.status ?? '',
-                  (progress?.progressPercentage ?? 0).toDouble()),
-              ElevatedButton(
-                  onPressed: () {
-                    homeProvider.removeToken();
-                    Navigator.pushReplacementNamed(context, '/login');
-                  },
-                  child: const Text('Logout')),
-              _buildContent(context),
-            ],
-          ));
+          return RefreshIndicator(
+            onRefresh: () async {
+              await Future.delayed(Duration(seconds: 2));
+              homeProvider.gamifikasi();
+              homeProvider.progressLesson();
+            },
+            child: SingleChildScrollView(
+                child: Column(
+              children: [
+                _buildHeader(
+                    context,
+                    home.level.toString(),
+                    home.totalPoints.toString(),
+                    (home.currentExp! / home.nextLevelExp!).toDouble(),
+                    progress?.lesson ?? '',
+                    progress?.status ?? '',
+                    (progress?.progressPercentage ?? 0).toDouble()),
+                ElevatedButton(
+                    onPressed: () {
+                      homeProvider.removeToken();
+                      Navigator.pushReplacementNamed(context, '/login');
+                    },
+                    child: const Text('Logout')),
+                _buildContent(context),
+              ],
+            )),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton.large(
@@ -134,7 +141,7 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.zero,
             barRadius: const Radius.circular(8),
             lineHeight: 6.0,
-            percent: progress.clamp(0.0, 1.0),
+            percent: (progress / 100).clamp(0.0, 1.0),
             width: 84,
             progressColor: Warna.primary4,
           ),

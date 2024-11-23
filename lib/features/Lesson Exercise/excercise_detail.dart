@@ -44,7 +44,7 @@ class ExcerciseDetail extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.5,
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),

@@ -118,18 +118,26 @@ class _ExcercisePageState extends State<ExcercisePage> {
                                   } else {
                                     final idLesson =
                                         Provider.of<LessonProvider>(context,
-                                                listen: false)
-                                            .idLesson;
+                                            listen: false);
                                     final idCourse =
                                         Provider.of<CourseProvider>(context,
                                                 listen: false)
                                             .idCourses;
-                                    excerciseProvider.resetQuiz();
-                                    excerciseProvider.completeExercise(
-                                        idCourse, idLesson);
-                                    Navigator.popAndPushNamed(
-                                        context, '/excercise-detail',
-                                        arguments: excercise.exerciseId);
+                                    if (idLesson
+                                            .lessonApi!.exercise!.isCompleted ==
+                                        false) {
+                                      excerciseProvider.resetQuiz();
+                                      excerciseProvider.completeExercise(
+                                          idCourse, idLesson.idLesson);
+                                      Navigator.popAndPushNamed(
+                                          context, '/excercise-detail',
+                                          arguments: excercise.exerciseId);
+                                    } else {
+                                      excerciseProvider.resetQuiz();
+                                      Navigator.popAndPushNamed(
+                                          context, '/excercise-detail',
+                                          arguments: excercise.exerciseId);
+                                    }
                                   }
                                 }
                               }

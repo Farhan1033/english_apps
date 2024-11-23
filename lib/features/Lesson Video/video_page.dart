@@ -103,13 +103,11 @@ class _VideoPageState extends State<VideoPage> {
         showControls: true,
         materialProgressColors:
             ChewieProgressColors(playedColor: Warna.primary4),
-        allowPlaybackSpeedChanging: true,// Nonaktifkan kecepatan pemutaran
-  draggableProgressBar: false,  
-     customControls: const CustomMaterialControls(
-        showPlayButton: true,
-      ),
-    
-      
+        allowPlaybackSpeedChanging: true,
+        draggableProgressBar: false,
+        customControls: const CustomMaterialControls(
+          showPlayButton: true,
+        ),
         allowFullScreen: true,
         deviceOrientationsOnEnterFullScreen: [
           DeviceOrientation.landscapeRight,
@@ -125,7 +123,6 @@ class _VideoPageState extends State<VideoPage> {
             videoPlayerController.value.duration) {
       setState(() {
         hasDialogShown = true;
-        videoCompleted();
       });
       showDialog(
         context: context,
@@ -152,9 +149,22 @@ class _VideoPageState extends State<VideoPage> {
                   lebarTombol: double.infinity,
                   navigasiTombol: () {
                     setState(() {
-                      getVideoApi();
-                      Navigator.popUntil(
-                          context, ModalRoute.withName('/lesson'));
+                      if (lessonProvider.lessonApi!.video!.isCompleted ==
+                          false) {
+                        videoCompleted();
+                        Future.delayed(
+                          Duration(seconds: 2),
+                          () {
+                            getVideoApi();
+                            Navigator.popUntil(
+                                context, ModalRoute.withName('/lesson'));
+                          },
+                        );
+                      } else {
+                        getVideoApi();
+                        Navigator.popUntil(
+                            context, ModalRoute.withName('/lesson'));
+                      }
                     });
                   },
                 );

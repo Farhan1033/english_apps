@@ -47,8 +47,7 @@ class ExerciseProvider with ChangeNotifier {
       _gradeExercise += 1;
       _showSnackBar(context, 'Jawaban Benar!', Warna.benar);
     } else {
-      _exercisePoints = (_exerciseApi!.exercisePoin ?? 0) - 1;
-      notifyListeners();
+      _exercisePoints = (_exerciseApi!.exercisePoin!) - 1;
       if (_exercisePoints < 0) {
         _exercisePoints = 0;
       }
@@ -70,7 +69,7 @@ class ExerciseProvider with ChangeNotifier {
     _selectedAnswerIndex = -1;
     _isAnswerSelected = false;
     _currentIndex = 0;
-    _exercisePoints = _exerciseApi?.exercisePoin ?? 0;
+    _exercisePoints = _exerciseApi!.exercisePoin!;
     _gradeExercise = 0;
     notifyListeners();
   }

@@ -45,61 +45,75 @@ class SummaryPage extends StatelessWidget {
 
         final summaryApi = summaryProvider.summaryAPI!;
 
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.75,
-                width: double.infinity,
-                color: Warna.primary1,
-                child: summaryApi.url != null
-                    ? SfPdfViewer.network('${summaryApi.url}')
-                    : Center(
-                        child: Tipografi().S1(
-                          isiText: "File Belum Tersedia",
-                          warnaFont: Warna.netral1,
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final isLandscape = constraints.maxWidth > constraints.maxHeight;
+
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: isLandscape
+                        ? constraints.maxHeight * 0.7
+                        : constraints.maxHeight * 0.75,
+                    child: Container(
+                      width: double.infinity,
+                      color: Warna.primary1,
+                      child: summaryApi.url != null
+                          ? SfPdfViewer.network('${summaryApi.url}')
+                          : Center(
+                              child: Tipografi().S1(
+                                isiText: "File Belum Tersedia",
+                                warnaFont: Warna.netral1,
+                              ),
+                            ),
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Tombol().PrimaryLarge(
+                          teksTombol: "Download",
+                          lebarTombol: constraints.maxWidth * 0.44,
+                          navigasiTombol: () {
+                            if (summaryApi.url != null) {
+                              print('URL untuk download: ${summaryApi.url}');
+                              // Logika untuk mendownload file bisa ditambahkan di sini
+                            } else {
+                              print('URL tidak tersedia untuk download');
+                            }
+                          },
                         ),
                       ),
-              ),
-              const SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Tombol Download
-                  Tombol().PrimaryLarge(
-                    teksTombol: "Download",
-                    lebarTombol: MediaQuery.of(context).size.width * 0.44,
-                    navigasiTombol: () {
-                      if (summaryApi.url != null) {
-                        print('URL untuk download: ${summaryApi.url}');
-                        // Logika untuk mendownload file bisa ditambahkan di sini
-                      } else {
-                        print('URL tidak tersedia untuk download');
-                      }
-                    },
-                  ),
-                  // Tombol Done
-                  Tombol().OutLineLarge(
-                    teksTombol: 'Done',
-                    lebarTombol: MediaQuery.of(context).size.width * 0.44,
-                    navigasiTombol: () {
-                      summaryProvider.summaryCompleted(context);
-                      Future.delayed(Duration(seconds: 3), () {
-                        Provider.of<LessonProvider>(context, listen: false)
-                            .lessonFetch(Provider.of<LessonProvider>(context,
-                                    listen: false)
-                                .idLesson);
-                        Navigator.pop(context);
-                      });
-                    },
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Tombol().OutLineLarge(
+                          teksTombol: 'Done',
+                          lebarTombol: constraints.maxWidth * 0.44,
+                          navigasiTombol: () {
+                            summaryProvider.summaryCompleted(context);
+                            Future.delayed(Duration(seconds: 1), () {
+                              Provider.of<LessonProvider>(context,
+                                      listen: false)
+                                  .lessonFetch(Provider.of<LessonProvider>(
+                                          context,
+                                          listen: false)
+                                      .idLesson);
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
-          ),
+            );
+          },
         );
       }),
     );

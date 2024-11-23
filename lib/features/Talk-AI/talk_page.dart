@@ -18,6 +18,7 @@ class _TalkPageState extends State<TalkPage> {
   bool _speechEnabled = false;
   String _lastWords = '';
   String _resultWord = '';
+  String _resultAiWord = '';
 
   @override
   void initState() {
@@ -47,6 +48,21 @@ class _TalkPageState extends State<TalkPage> {
     });
   }
 
+  Future<void> _sendDataAI() async {
+    if (_resultWord.isEmpty) return;
+
+    final talkAiProvider = Provider.of<TalkProvider>(context, listen: false);
+    await talkAiProvider.talkAiGen(talkAiProvider.talkApi!.corrected ?? '');
+
+    setState(() {
+      if (talkAiProvider.talkAiApi!.isCorrect == true) {
+        _resultAiWord = 'Answer: ${talkAiProvider.talkAiApi!.answer}';
+      } else if (talkAiProvider.talkAiApi!.isCorrect == false) {
+        _resultAiWord = 'Incorrect ${talkAiProvider.talkAiApi!.fix}';
+      }
+    });
+  }
+
   void _startListening() async {
     if (_speechEnabled) {
       await _speechToText.listen(onResult: _onSpeechResult);
@@ -60,11 +76,12 @@ class _TalkPageState extends State<TalkPage> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
+    setState(() async {
       _lastWords = result.recognizedWords;
 
       if (result.finalResult) {
-        _sendData();
+        await _sendData();
+        await _sendDataAI();
       }
     });
   }
@@ -81,7 +98,7 @@ class _TalkPageState extends State<TalkPage> {
       body: Consumer<TalkProvider>(
         builder: (context, talkProvider, _) {
           if (talkProvider.isLoading) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Warna.primary3,
               ),
@@ -92,13 +109,17 @@ class _TalkPageState extends State<TalkPage> {
             child: Column(
               children: [
                 ListView.builder(
-                  itemCount: 2,
+                  itemCount: 3,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return messageBox(context, _resultWord);
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: messageBox(context, _resultAiWord));
                     } else if (index == 1) {
+                      return messageBox(context, _resultWord);
+                    } else if (index == 2) {
                       return messageBox(context, _lastWords);
                     } else {
                       return const SizedBox.shrink();
