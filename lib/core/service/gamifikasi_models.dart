@@ -7,14 +7,15 @@ import 'package:http/http.dart' as http;
 class GamifikasiModels {
   Future<GamifikasiApi?> gamifikasiModel(String token) async {
     final respons = await http.get(
-        Uri.parse('http://${Localhost.localhost}:8080/api/v1/gamification'),
+        Uri.parse('http://${Localhost.localhost}/gamification'),
         headers: {'Authorization': 'Bearer $token'});
 
     if (respons.statusCode == 200) {
       final jsonData = jsonDecode(respons.body);
+      print(respons.body);
       return GamifikasiApi.fromJson(jsonData['data']);
     } else {
-      return null;
+      print(respons.body);
     }
   }
 }

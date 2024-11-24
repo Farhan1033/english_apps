@@ -12,6 +12,7 @@ class RegisterProvider with ChangeNotifier {
   bool _keamananPass = false;
   bool _isLoading = false;
   String? _errorMessage;
+  String? _userName;
 
   final namaController = TextEditingController();
   final emailController = TextEditingController();
@@ -23,6 +24,12 @@ class RegisterProvider with ChangeNotifier {
   bool get keamananConfPass => _keamananConfPass;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  String? get userName => _userName;
+
+  void setUserName(String? value) {
+    _userName = value;
+    notifyListeners();
+  }
 
   void toggleKeamananPass() {
     _keamananPass = !_keamananPass;

@@ -1,5 +1,7 @@
 import 'package:apps_skripsi/features/Analysis/analysis_page.dart';
 import 'package:apps_skripsi/features/Home/home_page.dart';
+import 'package:apps_skripsi/features/Profile/profile_page.dart';
+import 'package:apps_skripsi/features/Reward/reward_page.dart';
 import 'package:apps_skripsi/features/Talk-AI/talk_page.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +18,8 @@ class _WrapperState extends State<Wrapper> {
     const HomePage(),
     const AnalysisPage(),
     const TalkPage(),
+    const RewardPage(),
+    const ProfilePage()
   ];
 
   int currentIndex = 0;
@@ -23,16 +27,17 @@ class _WrapperState extends State<Wrapper> {
   @override
   void initState() {
     super.initState();
-    _loadLastPage();
+    _resetToHomePage();
   }
 
-  Future<void> _loadLastPage() async {
-    final prefs = await SharedPreferences.getInstance();
+  /// Mengatur halaman awal ke HomePage setiap kali aplikasi dibuka
+  Future<void> _resetToHomePage() async {
     setState(() {
-      currentIndex = prefs.getInt('lastIndex') ?? 0;
+      currentIndex = 0; // Tetapkan halaman pertama ke Home
     });
   }
 
+  /// Menyimpan halaman terakhir (jika dibutuhkan di masa depan)
   Future<void> _saveLastPage(int index) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('lastIndex', index);
@@ -47,7 +52,7 @@ class _WrapperState extends State<Wrapper> {
           setState(() {
             currentIndex = value;
           });
-          _saveLastPage(value);
+          _saveLastPage(value); // Masih menyimpan jika dibutuhkan di masa depan
         },
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,

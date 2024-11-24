@@ -56,7 +56,10 @@ class Tipografi {
     );
   }
 
-  Widget H6({required String isiText, required Color warnaFont}) {
+  Widget H6({
+    required String isiText,
+    required Color warnaFont,
+  }) {
     return Text(
       isiText,
       style: TextStyle(
@@ -67,11 +70,15 @@ class Tipografi {
     );
   }
 
-  Widget S1({required String isiText, required Color warnaFont}) {
+  Widget S1(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -80,11 +87,15 @@ class Tipografi {
     );
   }
 
-  Widget S2({required String isiText, required Color warnaFont}) {
+  Widget S2(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
@@ -93,11 +104,15 @@ class Tipografi {
     );
   }
 
-  Widget B1({required String isiText, required Color warnaFont}) {
+  Widget B1(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.normal,
@@ -106,11 +121,15 @@ class Tipografi {
     );
   }
 
-  Widget B2({required String isiText, required Color warnaFont}) {
+  Widget B2(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.normal,
@@ -130,11 +149,15 @@ class Tipografi {
     );
   }
 
-  Widget C({required String isiText, required Color warnaFont}) {
+  Widget C(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.normal,
@@ -143,11 +166,15 @@ class Tipografi {
     );
   }
 
-  Widget O({required String isiText, required Color warnaFont}) {
+  Widget O(
+      {required String isiText,
+      required Color warnaFont,
+      TextOverflow? oververFlow,
+      int? maxLines}) {
     return Text(
       isiText,
-      overflow: TextOverflow.ellipsis,
-      maxLines: 2,
+      overflow: oververFlow,
+      maxLines: maxLines,
       style: TextStyle(
           fontFamily: 'Poppins',
           fontWeight: FontWeight.normal,

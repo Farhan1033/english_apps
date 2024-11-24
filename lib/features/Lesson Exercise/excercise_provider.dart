@@ -84,6 +84,7 @@ class ExerciseProvider with ChangeNotifier {
           await _exerciseModels.excercise(exerciseId, token ?? '');
       if (exerciseData != null) {
         _exerciseApi = exerciseData;
+        _exercisePoints = _exerciseApi!.exercisePoin!;
       } else {
         _errorMessage = 'Data exercise tidak ditemukan.';
       }

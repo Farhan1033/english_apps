@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class AnalysisDetailModels {
   Future<AnalysisDetailApi?> analysisDetailModels(String token) async {
     final response = await http.get(
-        Uri.parse('http://${Localhost.localhost}:8080/api/v1/courses/summary'),
+        Uri.parse('http://${Localhost.localhost}/courses/summary'),
         headers: {'Authorization': 'Bearer $token'});
 
     if (response.statusCode == 200) {

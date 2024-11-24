@@ -1,3 +1,3 @@
 class Localhost {
-  static const String localhost = "192.168.18.141";
+  static const String localhost = "34.132.220.85:8080/api/v1";
 }

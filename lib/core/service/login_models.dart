@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class LoginService {
   static const String _url =
-      "http://${Localhost.localhost}:8080/api/v1/auth/login";
+      "http://${Localhost.localhost}/auth/login";
 
   Future<LoginApi?> loginUser(String email, String password) async {
     final response = await http.post(

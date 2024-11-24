@@ -8,7 +8,7 @@ class CourseService {
       String categoryCourses, String tokenCourse) async {
     final response = await http.get(
         Uri.parse(
-            "http://${Localhost.localhost}:8080/api/v1/courses?coursename=speaking&coursecategory=$categoryCourses"),
+            "http://${Localhost.localhost}/courses?coursename=speaking&coursecategory=$categoryCourses"),
         headers: {'Authorization': 'Bearer $tokenCourse'});
 
     if (response.statusCode == 200) {

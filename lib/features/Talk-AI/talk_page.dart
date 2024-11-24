@@ -55,11 +55,7 @@ class _TalkPageState extends State<TalkPage> {
     await talkAiProvider.talkAiGen(talkAiProvider.talkApi!.corrected ?? '');
 
     setState(() {
-      if (talkAiProvider.talkAiApi!.isCorrect == true) {
-        _resultAiWord = 'Answer: ${talkAiProvider.talkAiApi!.answer}';
-      } else if (talkAiProvider.talkAiApi!.isCorrect == false) {
-        _resultAiWord = 'Incorrect ${talkAiProvider.talkAiApi!.fix}';
-      }
+      _resultAiWord = 'Answer: ${talkAiProvider.talkAiApi!.answer}';
     });
   }
 
@@ -78,7 +74,6 @@ class _TalkPageState extends State<TalkPage> {
   void _onSpeechResult(SpeechRecognitionResult result) {
     setState(() async {
       _lastWords = result.recognizedWords;
-
       if (result.finalResult) {
         await _sendData();
         await _sendDataAI();
@@ -115,8 +110,8 @@ class _TalkPageState extends State<TalkPage> {
                   itemBuilder: (context, index) {
                     if (index == 0) {
                       return SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        child: messageBox(context, _resultAiWord));
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          child: messageBox(context, _resultAiWord));
                     } else if (index == 1) {
                       return messageBox(context, _resultWord);
                     } else if (index == 2) {
@@ -133,6 +128,8 @@ class _TalkPageState extends State<TalkPage> {
                   children: [
                     _buildCircleButton(
                       icon: Icons.timelapse,
+                      tinggi: 0.15,
+                      lebar: 0.15,
                       size: 25,
                       onPressed: () {},
                     ),
@@ -141,6 +138,8 @@ class _TalkPageState extends State<TalkPage> {
                           ? Icons.mic_off
                           : Icons.mic,
                       size: 35,
+                      tinggi: 0.25,
+                      lebar: 0.25,
                       onPressed: _speechToText.isNotListening
                           ? _startListening
                           : _stopListening,
@@ -148,10 +147,13 @@ class _TalkPageState extends State<TalkPage> {
                     _buildCircleButton(
                       icon: Icons.restart_alt,
                       size: 25,
+                      tinggi: 0.15,
+                      lebar: 0.15,
                       onPressed: () {
                         setState(() {
                           _lastWords = '';
                           _resultWord = '';
+                          _resultAiWord = '';
                         });
                       },
                     ),
@@ -169,10 +171,12 @@ class _TalkPageState extends State<TalkPage> {
     required IconData icon,
     required double size,
     required VoidCallback onPressed,
+    required double tinggi,
+    required double lebar,
   }) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.15,
-      height: MediaQuery.of(context).size.width * 0.15,
+      width: MediaQuery.of(context).size.width * lebar,
+      height: MediaQuery.of(context).size.width * tinggi,
       decoration: const BoxDecoration(
         color: Warna.primary3,
         shape: BoxShape.circle,

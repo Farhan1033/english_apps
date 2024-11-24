@@ -12,7 +12,6 @@ import 'package:apps_skripsi/features/Lesson%20Exercise/excercise_provider.dart'
 import 'package:apps_skripsi/features/Lesson%20Summary/summary_page.dart';
 import 'package:apps_skripsi/features/Lesson%20Summary/summary_provider.dart';
 import 'package:apps_skripsi/features/Lesson%20Video/video_page.dart';
-import 'package:apps_skripsi/features/Lesson%20Video/video_provider.dart';
 import 'package:apps_skripsi/features/Lesson/lesson_page.dart';
 import 'package:apps_skripsi/features/Lesson/lesson_provider.dart';
 import 'package:apps_skripsi/features/Register/register_page.dart';
@@ -42,7 +41,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => CourseProvider()),
         ChangeNotifierProvider(create: (_) => RegisterProvider()),
         ChangeNotifierProvider(create: (_) => LessonProvider()),
-        ChangeNotifierProvider(create: (_) => VideoProvider()),
         ChangeNotifierProvider(create: (_) => ExerciseProvider()),
         ChangeNotifierProvider(create: (_) => SummaryProvider()),
         ChangeNotifierProvider(create: (_) => TalkProvider()),

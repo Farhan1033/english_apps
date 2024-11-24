@@ -1,5 +1,6 @@
 import 'package:apps_skripsi/core/theme/color_primary.dart';
 import 'package:apps_skripsi/core/theme/typography.dart';
+import 'package:apps_skripsi/features/Course/course_provider.dart';
 import 'package:apps_skripsi/features/Home/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -14,6 +15,8 @@ class HomePage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<HomeProvider>(context, listen: false).gamifikasi();
       Provider.of<HomeProvider>(context, listen: false).progressLesson();
+      final course = Provider.of<CourseProvider>(context, listen: false);
+      course.fetchCourse(course.categoryCourse);
     });
     return Scaffold(
       body: Consumer<HomeProvider>(
@@ -50,12 +53,6 @@ class HomePage extends StatelessWidget {
                     progress?.lesson ?? '',
                     progress?.status ?? '',
                     (progress?.progressPercentage ?? 0).toDouble()),
-                ElevatedButton(
-                    onPressed: () {
-                      homeProvider.removeToken();
-                      Navigator.pushReplacementNamed(context, '/login');
-                    },
-                    child: const Text('Logout')),
                 _buildContent(context),
               ],
             )),
@@ -247,7 +244,6 @@ class HomePage extends StatelessWidget {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Jika layar kecil, gunakan kolom dengan ruang terbatas
               if (isSmallScreen) ...[
                 _buildCourseImage("assets/images/Property 1=Speaking.png"),
                 const SizedBox(width: 10),
@@ -257,14 +253,17 @@ class HomePage extends StatelessWidget {
                     children: [
                       _buildOngoingLabel(label),
                       const SizedBox(height: 5.0),
-                      Tipografi().S1(isiText: title, warnaFont: Warna.netral1)
+                      Tipografi().S1(
+                          isiText: title,
+                          warnaFont: Warna.netral1,
+                          oververFlow: TextOverflow.ellipsis,
+                          maxLines: 2)
                     ],
                   ),
                 ),
                 const SizedBox(width: 10),
                 _buildCircularProgressIndicator(percentProgress),
               ] else ...[
-                // Untuk layar lebih besar, tetap dalam Row
                 Row(
                   children: [
                     _buildCourseImage("assets/images/Property 1=Speaking.png"),
@@ -276,8 +275,11 @@ class HomePage extends StatelessWidget {
                         children: [
                           _buildOngoingLabel(label),
                           const SizedBox(height: 5.0),
-                          Tipografi()
-                              .S1(isiText: title, warnaFont: Warna.netral1)
+                          Tipografi().S1(
+                              isiText: title,
+                              warnaFont: Warna.netral1,
+                              oververFlow: TextOverflow.ellipsis,
+                              maxLines: 2)
                         ],
                       ),
                     ),
@@ -425,72 +427,95 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildRecommendationList() {
-    return SizedBox(
-      height: 272,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return Container(
-            width: 237,
-            margin: const EdgeInsets.only(right: 12.0, bottom: 5.0),
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: Warna.primary1,
-              borderRadius: BorderRadius.circular(8.0),
-              boxShadow: [
-                BoxShadow(
-                    blurRadius: 2.0,
-                    offset: const Offset(0, 2),
-                    spreadRadius: 0.0,
-                    color: Warna.netral1.withOpacity(0.07)),
-                BoxShadow(
-                    blurRadius: 1.0,
-                    offset: const Offset(0, 3),
-                    spreadRadius: 0.0,
-                    color: Warna.netral1.withOpacity(0.06)),
-                BoxShadow(
-                    blurRadius: 10.0,
-                    offset: const Offset(0, 1),
-                    spreadRadius: 0.0,
-                    color: Warna.netral1.withOpacity(0.1)),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 177,
-                  width: 217,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage("assets/images/Rectangle 11.png"))),
-                ),
-                const SizedBox(height: 10.0),
-                _buildRecommendationHeader(),
-              ],
-            ),
+    return Consumer<CourseProvider>(
+      builder: (context, coursesProvider, _) {
+        if (coursesProvider.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
           );
-        },
-      ),
+        }
+        if (coursesProvider.errorMessage != null) {
+          return const Center(
+            child: Text('Database not found!'),
+          );
+        }
+        if (coursesProvider.course == null) {
+          return const Center(
+            child: Text('Data not found!'),
+          );
+        }
+        final course = coursesProvider.course!;
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.45,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: course.listLessons!.length,
+            itemBuilder: (context, index) {
+              final listCourse = course.listLessons![index];
+              return GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, '/lesson',
+                      arguments: listCourse.idLesson);
+                },
+                child: Container(
+                  width: 237,
+                  margin: const EdgeInsets.only(right: 12.0, bottom: 5.0),
+                  padding: const EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                    color: Warna.primary1,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 2.0,
+                          offset: const Offset(0, 2),
+                          spreadRadius: 0.0,
+                          color: Warna.netral1.withOpacity(0.07)),
+                      BoxShadow(
+                          blurRadius: 1.0,
+                          offset: const Offset(0, 3),
+                          spreadRadius: 0.0,
+                          color: Warna.netral1.withOpacity(0.06)),
+                      BoxShadow(
+                          blurRadius: 10.0,
+                          offset: const Offset(0, 1),
+                          spreadRadius: 0.0,
+                          color: Warna.netral1.withOpacity(0.1)),
+                    ],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 177,
+                        width: 217,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/images/Rectangle 11.png"))),
+                      ),
+                      const SizedBox(height: 20.0),
+                      Flexible(
+                        child: _buildRecommendationHeader(
+                            listCourse.lessonsName!, listCourse.description!),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildRecommendationHeader() {
-    return const Column(
+  Widget _buildRecommendationHeader(String title, String description) {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Speaking",
-          style: TextStyle(
-              fontFamily: "Poppins", fontSize: 14, color: Warna.netral1),
-        ),
-        SizedBox(height: 5.0),
-        Text(
-          "Mastering Speaking",
-          style: TextStyle(
-              fontFamily: "Poppins", fontSize: 14, color: Warna.netral1),
-        ),
+        Tipografi().S1(isiText: title, warnaFont: Warna.netral1),
+        const SizedBox(height: 5.0),
+        Tipografi().B2(isiText: description, warnaFont: Warna.netral1),
       ],
     );
   }

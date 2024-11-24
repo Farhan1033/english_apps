@@ -12,7 +12,6 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Consumer<RegisterProvider>(builder: (context, registerProvider, _) {
         return SingleChildScrollView(
           child: SizedBox(

@@ -30,7 +30,7 @@ class _CoursePageState extends State<CoursePage> {
 
   void _fetchCourseData() {
     final courseProvider = Provider.of<CourseProvider>(context, listen: false);
-    courseProvider.fetchCourse(courseProvider.categoryCourse, tokenAkun ?? '');
+    courseProvider.fetchCourse(courseProvider.categoryCourse);
   }
 
   @override

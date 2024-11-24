@@ -8,7 +8,7 @@ class EventLessonModels {
       String token, String idLesson, String idCourse, String eventType) async {
     final respons = await http.put(
         Uri.parse(
-            'http://${Localhost.localhost}:8080/api/v1/update_progress_lesson'),
+            'http://${Localhost.localhost}/update_progress_lesson'),
         headers: {'Authorization': 'Bearer $token'},
         body: jsonEncode({
           'lesson_id': idLesson,

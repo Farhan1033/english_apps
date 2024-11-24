@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class RegisterModel {
   static const String url =
-      'http://${Localhost.localhost}:8080/api/v1/auth/register';
+      'http://${Localhost.localhost}/auth/register';
 
   Future<RegisterApi?> registerAPI(
       String username, String email, String password) async {

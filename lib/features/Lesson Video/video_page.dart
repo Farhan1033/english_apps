@@ -39,8 +39,7 @@ class _VideoPageState extends State<VideoPage> {
     final token = await Token().getToken();
     final idVideo = ModalRoute.of(context)?.settings.arguments.toString();
     final response = await http.get(
-      Uri.parse(
-          "http://${Localhost.localhost}:8080/api/v1/video-parts/$idVideo"),
+      Uri.parse("http://${Localhost.localhost}/video-parts/$idVideo"),
       headers: {'Authorization': 'Bearer $token'},
     );
 
@@ -62,8 +61,7 @@ class _VideoPageState extends State<VideoPage> {
     final course =
         Provider.of<CourseProvider>(context, listen: false).idCourses;
     final respons = await http.put(
-        Uri.parse(
-            'http://${Localhost.localhost}:8080/api/v1/update_progress_lesson'),
+        Uri.parse('http://${Localhost.localhost}/update_progress_lesson'),
         headers: {'Authorization': 'Bearer $token'},
         body: jsonEncode(
             {'lesson_id': lesson, 'course_id': course, 'event_type': 'video'}));
@@ -234,13 +232,9 @@ class _VideoPageState extends State<VideoPage> {
                                       videoApi?.title ?? "Video Tidak Tersedia",
                                   warnaFont: Warna.netral1),
                               const SizedBox(height: 16),
-                              const Text(
-                                'Description',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              Tipografi().S1(
+                                  isiText: 'Description',
+                                  warnaFont: Warna.netral1),
                               const SizedBox(height: 8),
                               Tipografi().B2(
                                   isiText: videoApi?.description ??

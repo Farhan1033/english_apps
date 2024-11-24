@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 class LessonModels {
   Future<LessonApi?> lessonAPI(String id_courses, String token) async {
     final response = await http.get(
-        Uri.parse('http://${Localhost.localhost}:8080/api/v1/lesson/$id_courses'),
+        Uri.parse('http://${Localhost.localhost}/lesson/$id_courses'),
         headers: {'Authorization': 'Bearer ${token}'});
 
     if (response.statusCode == 200) {
