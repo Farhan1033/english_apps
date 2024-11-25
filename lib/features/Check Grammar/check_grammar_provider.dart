@@ -6,13 +6,20 @@ class CheckGrammarProvider with ChangeNotifier {
   bool _isLoading = false;
   String? _hasError;
   TalkApi? _talkApi;
+  String? _resultGrammar;
   final TalkModels _talkModels = TalkModels();
   final TextEditingController _sentenceController = TextEditingController();
 
   bool get isLoading => _isLoading;
   String? get hasError => _hasError;
+  String? get resultGrammar => _resultGrammar;
   TalkApi? get talkApi => _talkApi;
   TextEditingController get sentenceController => _sentenceController;
+
+  void setGrammar(String? value) {
+    _resultGrammar = value;
+    notifyListeners();
+  }
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -43,20 +50,24 @@ class CheckGrammarProvider with ChangeNotifier {
 
       if (checkData != null) {
         setTalkApi(checkData);
+        setGrammar(checkData.corrected);
       } else {
         setTalkApi(null);
+        setGrammar(null);
       }
     } catch (e) {
       setError(e.toString());
+      setGrammar(null);
     } finally {
       setLoading(false);
     }
   }
 
   void cleanData() {
-    _sentenceController.dispose();
+    _resultGrammar = null;
     _talkApi = null;
     _hasError = null;
+    _sentenceController.clear();
     notifyListeners();
   }
 }

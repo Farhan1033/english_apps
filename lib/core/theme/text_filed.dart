@@ -36,6 +36,9 @@ class AreaTeks {
       required BorderRadius radius}) {
     return TextFormField(
       controller: editingController,
+      maxLines: null,
+
+      keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
               borderRadius: radius,
@@ -45,7 +48,7 @@ class AreaTeks {
           hintText: textIsi,
           hintStyle: TextStyle(
               fontFamily: 'Poppins',
-              fontSize: 16.0,
+              fontSize: 14.0,
               fontWeight: FontWeight.w500),
           border: OutlineInputBorder(borderRadius: radius)),
     );

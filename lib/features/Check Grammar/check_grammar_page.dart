@@ -13,73 +13,83 @@ class CheckGrammarPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Warna.primary3,
+        iconTheme: IconThemeData(color: Warna.primary1),
         title:
             Tipografi().S1(isiText: 'Check Grammar', warnaFont: Warna.primary1),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-        child: Consumer<CheckGrammarProvider>(
-          builder: (context, checkGrammarProvider, child) {
-            final grammar = checkGrammarProvider.talkApi!;
-            return SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      if (checkGrammarProvider.isLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (checkGrammarProvider.hasError != null) {
-                        return const Center(
-                          child: Text('Database not found!'),
-                        );
-                      }
-                      if (checkGrammarProvider.talkApi == null) {
-                        return const Center(
-                          child: Text('Data not found!'),
-                        );
-                      }
-                      return messageBox(context, grammar.corrected!,
-                          CrossAxisAlignment.start, 'Gen-AI');
-                    },
-                  ),
-                  
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          child: AreaTeks().teksCheck(
-                              editingController:
-                                  checkGrammarProvider.sentenceController,
-                              textIsi: 'Check Grammar',
-                              radius: BorderRadius.circular(8))),
-                      _buildCircleButton(
-                        context: context,
-                        icon: Icons.send_rounded,
-                        size: 20,
-                        tinggi: 0.15,
-                        lebar: 0.15,
-                        onPressed: () {
-                          checkGrammarProvider.checkGrammar(
-                              checkGrammarProvider.sentenceController.text);
-                        },
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+      body: Consumer<CheckGrammarProvider>(
+        builder: (context, checkGrammarProvider, child) {
+          return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            height: MediaQuery.of(context).size.height * 0.9,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    if (checkGrammarProvider.isLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    if (checkGrammarProvider.hasError != null) {
+                      return const Center(
+                        child: Text('Database not found!'),
+                      );
+                    }
+                    if (checkGrammarProvider.talkApi == null) {
+                      return const Center(
+                        child: Text('Please Type Your Sentences'),
+                      );
+                    }
+                    return messageBox(
+                        context,
+                        checkGrammarProvider.resultGrammar ?? '',
+                        CrossAxisAlignment.start,
+                        'Gen-AI');
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        child: AreaTeks().teksCheck(
+                            editingController:
+                                checkGrammarProvider.sentenceController,
+                            textIsi: 'Type Your Senteces here',
+                            radius: BorderRadius.circular(8))),
+                    _buildCircleButton(
+                      context: context,
+                      icon: Icons.delete,
+                      size: 20,
+                      tinggi: 0.15,
+                      lebar: 0.15,
+                      onPressed: () {
+                        checkGrammarProvider.cleanData();
+                      },
+                    ),
+                    _buildCircleButton(
+                      context: context,
+                      icon: Icons.send_rounded,
+                      size: 20,
+                      tinggi: 0.15,
+                      lebar: 0.15,
+                      onPressed: () {
+                        checkGrammarProvider.checkGrammar(
+                            checkGrammarProvider.sentenceController.text);
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

@@ -469,55 +469,70 @@ class HomePage extends StatelessWidget {
       ),
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Warna.primary1,
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 2.0,
-                  offset: const Offset(0, 2),
-                  spreadRadius: 0.0,
-                  color: Warna.netral1.withOpacity(0.07),
-                ),
-                BoxShadow(
-                  blurRadius: 1.0,
-                  offset: const Offset(0, 3),
-                  spreadRadius: 0.0,
-                  color: Warna.netral1.withOpacity(0.06),
-                ),
-                BoxShadow(
-                  blurRadius: 10.0,
-                  offset: const Offset(0, 1),
-                  spreadRadius: 0.0,
-                  color: Warna.netral1.withOpacity(0.1),
-                ),
-              ],
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 30,
-                  height: 30,
-                  child: Image.asset(items[index]["image"]!),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Tipografi().S2(
-                  isiText: items[index]["text"]!,
-                  warnaFont: Warna.netral1,
-                ),
-              ],
-            ),
-          ),
-        );
+        if (index == 0) {
+          return _buildIOnTapNavigatorAI(items, index, () {
+            Navigator.pushNamed(context, '/check-grammar');
+          });
+        } else if (index == 1) {
+          return _buildIOnTapNavigatorAI(items, index, () {
+            Navigator.pushNamed(context, '/chat-ai');
+          });
+        } else {
+          return Container();
+        }
       },
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+    );
+  }
+
+  GestureDetector _buildIOnTapNavigatorAI(
+      List<Map<String, String>> items, int index, VoidCallback navigatorAI) {
+    return GestureDetector(
+      onTap: navigatorAI,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Warna.primary1,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 2.0,
+              offset: const Offset(0, 2),
+              spreadRadius: 0.0,
+              color: Warna.netral1.withOpacity(0.07),
+            ),
+            BoxShadow(
+              blurRadius: 1.0,
+              offset: const Offset(0, 3),
+              spreadRadius: 0.0,
+              color: Warna.netral1.withOpacity(0.06),
+            ),
+            BoxShadow(
+              blurRadius: 10.0,
+              offset: const Offset(0, 1),
+              spreadRadius: 0.0,
+              color: Warna.netral1.withOpacity(0.1),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            SizedBox(
+              width: 30,
+              height: 30,
+              child: Image.asset(items[index]["image"]!),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Tipografi().S2(
+              isiText: items[index]["text"]!,
+              warnaFont: Warna.netral1,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
