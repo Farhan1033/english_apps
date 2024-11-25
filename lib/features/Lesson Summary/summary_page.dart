@@ -12,13 +12,13 @@ class SummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final idSummary = ModalRoute.of(context)?.settings.arguments?.toString();
-    if (idSummary != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Provider.of<SummaryProvider>(context, listen: false)
-            .summaryData(idSummary);
-      });
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final idSummary = ModalRoute.of(context)?.settings.arguments.toString();
+      final summaryContext = context.read<SummaryProvider>();
+      if (idSummary != null) {
+        summaryContext.summaryData(idSummary);
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
@@ -56,8 +56,8 @@ class SummaryPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: isLandscape
-                        ? constraints.maxHeight * 0.7
-                        : constraints.maxHeight * 0.75,
+                        ? constraints.maxHeight * 0.75
+                        : constraints.maxHeight * 0.85,
                     child: Container(
                       width: double.infinity,
                       color: Warna.primary1,
@@ -72,43 +72,25 @@ class SummaryPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Tombol().PrimaryLarge(
-                          teksTombol: "Download",
-                          lebarTombol: constraints.maxWidth * 0.44,
-                          navigasiTombol: () {
-                            if (summaryApi.url != null) {
-                              print('URL untuk download: ${summaryApi.url}');
-                              // Logika untuk mendownload file bisa ditambahkan di sini
-                            } else {
-                              print('URL tidak tersedia untuk download');
-                            }
-                          },
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Tombol().OutLineLarge(
-                          teksTombol: 'Done',
-                          lebarTombol: constraints.maxWidth * 0.44,
-                          navigasiTombol: () {
-                            summaryProvider.summaryCompleted(context);
-                            Future.delayed(Duration(seconds: 1), () {
-                              Provider.of<LessonProvider>(context,
-                                      listen: false)
-                                  .lessonFetch(Provider.of<LessonProvider>(
-                                          context,
-                                          listen: false)
-                                      .idLesson);
-                              Navigator.pop(context);
-                            });
-                          },
-                        ),
-                      ),
-                    ],
+                  Tombol().PrimaryLarge(
+                    teksTombol: 'Done',
+                    lebarTombol: double.maxFinite,
+                    navigasiTombol: () {
+                      final lesson = context.read<LessonProvider>();
+                      if (lesson.lessonApi!.summary!.isCompleted ==
+                          false) {
+                        summaryProvider.summaryCompleted(context);
+                        Future.delayed(const Duration(seconds: 2), () {
+                          lesson.lessonFetch(lesson.idLesson);
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/lesson'));
+                        });
+                      } else {
+                        lesson.lessonFetch(lesson.idLesson);
+                        Navigator.popUntil(
+                            context, ModalRoute.withName('/lesson'));
+                      }
+                    },
                   ),
                 ],
               ),

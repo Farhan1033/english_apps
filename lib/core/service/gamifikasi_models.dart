@@ -15,7 +15,7 @@ class GamifikasiModels {
       print(respons.body);
       return GamifikasiApi.fromJson(jsonData['data']);
     } else {
-      print(respons.body);
+      return null;
     }
   }
 }

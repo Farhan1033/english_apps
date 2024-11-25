@@ -146,24 +146,21 @@ class _VideoPageState extends State<VideoPage> {
                   teksTombol: "Next",
                   lebarTombol: double.infinity,
                   navigasiTombol: () {
-                    setState(() {
-                      if (lessonProvider.lessonApi!.video!.isCompleted ==
-                          false) {
-                        videoCompleted();
-                        Future.delayed(
-                          Duration(seconds: 2),
-                          () {
-                            getVideoApi();
-                            Navigator.popUntil(
-                                context, ModalRoute.withName('/lesson'));
-                          },
-                        );
-                      } else {
-                        getVideoApi();
-                        Navigator.popUntil(
-                            context, ModalRoute.withName('/lesson'));
-                      }
-                    });
+                    if (lessonProvider.lessonApi!.video!.isCompleted == false) {
+                      videoCompleted();
+                      Future.delayed(
+                        const Duration(seconds: 2),
+                        () {
+                          getVideoApi();
+                          Navigator.popUntil(
+                              context, ModalRoute.withName('/lesson'));
+                        },
+                      );
+                    } else {
+                      getVideoApi();
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/lesson'));
+                    }
                   },
                 );
               },

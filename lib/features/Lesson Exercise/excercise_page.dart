@@ -112,9 +112,8 @@ class _ExcercisePageState extends State<ExcercisePage> {
                                   if (excerciseProvider.statusKelulusan ==
                                       'Tidak Lulus') {
                                     excerciseProvider.resetQuiz();
-                                    Navigator.popAndPushNamed(
-                                        context, '/excercise-detail',
-                                        arguments: excercise.exerciseId);
+                                    showResultDialog(
+                                        context, excerciseProvider);
                                   } else {
                                     final idLesson =
                                         Provider.of<LessonProvider>(context,
@@ -129,14 +128,12 @@ class _ExcercisePageState extends State<ExcercisePage> {
                                       excerciseProvider.resetQuiz();
                                       excerciseProvider.completeExercise(
                                           idCourse, idLesson.idLesson);
-                                      Navigator.popAndPushNamed(
-                                          context, '/excercise-detail',
-                                          arguments: excercise.exerciseId);
+                                      showResultDialog(
+                                          context, excerciseProvider);
                                     } else {
                                       excerciseProvider.resetQuiz();
-                                      Navigator.popAndPushNamed(
-                                          context, '/excercise-detail',
-                                          arguments: excercise.exerciseId);
+                                      showResultDialog(
+                                          context, excerciseProvider);
                                     }
                                   }
                                 }
@@ -149,6 +146,75 @@ class _ExcercisePageState extends State<ExcercisePage> {
           );
         },
       ),
+    );
+  }
+
+  void showResultDialog(
+      BuildContext context, ExerciseProvider exerciseProvider) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          backgroundColor: Warna.primary1,
+          content: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.5,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Warna.primary1,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Tipografi().H6(
+                  isiText: exerciseProvider.totalGrade! >= 75
+                      ? 'Good job'
+                      : 'Try Again',
+                  warnaFont: Warna.netral1,
+                ),
+                const SizedBox(height: 10),
+                Image.asset('assets/images/Clip path group.png'),
+                const SizedBox(height: 10),
+                Tipografi().S1(
+                  isiText: 'Score: ${exerciseProvider.totalGrade}',
+                  warnaFont: Warna.netral1,
+                ),
+                const SizedBox(height: 10),
+                if (exerciseProvider.totalGrade! < 75)
+                  Tombol().PrimarySmall(
+                    teksTombol: 'Retry',
+                    lebarTombol: double.maxFinite,
+                    navigasiTombol: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/excercise',
+                        arguments: exerciseProvider.exerciseApi!.exerciseId,
+                      );
+                    },
+                  ),
+                const SizedBox(height: 5),
+                Tombol().OutLineSmall(
+                  teksTombol: 'Back To Lesson',
+                  lebarTombol: double.maxFinite,
+                  navigasiTombol: () {
+                    Future.delayed(const Duration(seconds: 2), () {
+                      final lesson = context.read<LessonProvider>();
+                      lesson.lessonFetch(lesson.idLesson);
+                      Navigator.popUntil(
+                          context, ModalRoute.withName('/lesson'));
+                    });
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 

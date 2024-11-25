@@ -6,7 +6,6 @@ import 'package:apps_skripsi/features/Course/course_provider.dart';
 import 'package:apps_skripsi/features/Daily-Event/daily_page.dart';
 import 'package:apps_skripsi/features/Home/home_page.dart';
 import 'package:apps_skripsi/features/Home/home_provider.dart';
-import 'package:apps_skripsi/features/Lesson%20Exercise/excercise_detail.dart';
 import 'package:apps_skripsi/features/Lesson%20Exercise/excercise_page.dart';
 import 'package:apps_skripsi/features/Lesson%20Exercise/excercise_provider.dart';
 import 'package:apps_skripsi/features/Lesson%20Summary/summary_page.dart';
@@ -16,6 +15,7 @@ import 'package:apps_skripsi/features/Lesson/lesson_page.dart';
 import 'package:apps_skripsi/features/Lesson/lesson_provider.dart';
 import 'package:apps_skripsi/features/Register/register_page.dart';
 import 'package:apps_skripsi/features/Register/register_provider.dart';
+import 'package:apps_skripsi/features/Reward/reward_provider.dart';
 import 'package:apps_skripsi/features/Talk-AI/talk_provider.dart';
 import 'package:apps_skripsi/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +44,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ExerciseProvider()),
         ChangeNotifierProvider(create: (_) => SummaryProvider()),
         ChangeNotifierProvider(create: (_) => TalkProvider()),
-        ChangeNotifierProvider(create: (_) => AnalysisDetailProvider())
+        ChangeNotifierProvider(create: (_) => AnalysisDetailProvider()),
+        ChangeNotifierProvider(create: (_) => RewardProvider())
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -57,7 +58,6 @@ class MyApp extends StatelessWidget {
           '/video': (context) => const VideoPage(),
           '/excercise': (context) => const ExcercisePage(),
           '/summary': (context) => const SummaryPage(),
-          '/excercise-detail': (context) => const ExcerciseDetail(),
           '/daily-event': (context) => const DailyPage(),
           '/wrapper': (context) => const Wrapper(),
           '/analysis-detail': (context) => const AnalysisDetailPage()

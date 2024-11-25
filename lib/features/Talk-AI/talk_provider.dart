@@ -44,7 +44,8 @@ class TalkProvider with ChangeNotifier {
 
     try {
       final token = await Token().getToken();
-      final talkAiGenData = await _talkAiModels.talkAiModels(token!, sentence);
+      final talkAiGenData =
+          await _talkAiModels.talkAiModels(token ?? '', sentence);
 
       if (talkAiGenData != null) {
         setTalkAiApi(talkAiGenData);

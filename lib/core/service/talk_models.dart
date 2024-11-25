@@ -12,7 +12,6 @@ class TalkModels {
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
-      print(response.body);
       return TalkApi.fromJson(jsonData);
     } else {
       return null;

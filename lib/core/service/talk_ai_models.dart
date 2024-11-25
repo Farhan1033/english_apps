@@ -13,10 +13,8 @@ class TalkAiModels {
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
-      print(response.body);
       return TalkAiApi.fromJson(jsonData);
     } else {
-      print(response.body);
       return null;
     }
   }

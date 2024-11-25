@@ -43,7 +43,7 @@ class LessonPage extends StatelessWidget {
           return RefreshIndicator(
             onRefresh: () async {
               Future.delayed(
-                Duration(seconds: 2),
+                const Duration(seconds: 2),
                 () {
                   lessonProvider.lessonFetch(lessonProvider.idLesson);
                 },
@@ -166,18 +166,12 @@ class LessonPage extends StatelessWidget {
                           );
                         } else if (index == 2) {
                           return selectedLesson(
-                            navigasi: () async {
-                              final result = await Navigator.pushNamed(
+                            navigasi: () {
+                              Navigator.pushNamed(
                                 context,
                                 '/summary',
                                 arguments: lesson.summary!.summaryId,
                               );
-
-                              if (result == true) {
-                                Provider.of<LessonProvider>(context,
-                                        listen: false)
-                                    .lessonFetch(lessonProvider.idLesson);
-                              }
                             },
                             is_completed: lesson.summary?.isCompleted ?? false,
                             data_title: "Summary",
