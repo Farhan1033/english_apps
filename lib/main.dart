@@ -1,6 +1,8 @@
 import 'package:apps_skripsi/core/utils/shared_preferences.dart';
 import 'package:apps_skripsi/features/Analysis/analysis_detail_provider.dart';
 import 'package:apps_skripsi/features/Analysis/analysisi_detail_page.dart';
+import 'package:apps_skripsi/features/Check%20Grammar/check_grammar_page.dart';
+import 'package:apps_skripsi/features/Check%20Grammar/check_grammar_provider.dart';
 import 'package:apps_skripsi/features/Course/course_page.dart';
 import 'package:apps_skripsi/features/Course/course_provider.dart';
 import 'package:apps_skripsi/features/Daily-Event/daily_page.dart';
@@ -45,7 +47,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SummaryProvider()),
         ChangeNotifierProvider(create: (_) => TalkProvider()),
         ChangeNotifierProvider(create: (_) => AnalysisDetailProvider()),
-        ChangeNotifierProvider(create: (_) => RewardProvider())
+        ChangeNotifierProvider(create: (_) => RewardProvider()),
+        ChangeNotifierProvider(create: (_) => CheckGrammarProvider())
       ],
       child: MaterialApp(
         initialRoute: '/',
@@ -60,7 +63,8 @@ class MyApp extends StatelessWidget {
           '/summary': (context) => const SummaryPage(),
           '/daily-event': (context) => const DailyPage(),
           '/wrapper': (context) => const Wrapper(),
-          '/analysis-detail': (context) => const AnalysisDetailPage()
+          '/analysis-detail': (context) => const AnalysisDetailPage(),
+          '/check-grammar' : (context) => const CheckGrammarPage()
         },
         debugShowCheckedModeBanner: false,
         home: const AuthCheck(),

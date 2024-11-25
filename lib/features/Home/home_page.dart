@@ -59,24 +59,24 @@ class HomePage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton.large(
-        highlightElevation: 0,
-        hoverColor: Colors.transparent,
-        foregroundColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        onPressed: () {
-          Navigator.pushNamed(context, '/daily-event');
-        },
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Image.asset(
-            'assets/images/Frame 172.png',
-            fit: BoxFit.fill,
-          ),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.large(
+      //   highlightElevation: 0,
+      //   hoverColor: Colors.transparent,
+      //   foregroundColor: Colors.transparent,
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   onPressed: () {
+      //     Navigator.pushNamed(context, '/daily-event');
+      //   },
+      //   child: SizedBox(
+      //     height: double.infinity,
+      //     width: double.infinity,
+      //     child: Image.asset(
+      //       'assets/images/Frame 172.png',
+      //       fit: BoxFit.fill,
+      //     ),
+      //   ),
+      // ),
     );
   }
 
@@ -367,6 +367,8 @@ class HomePage extends StatelessWidget {
           _buildSearchField(),
           const SizedBox(height: 30),
           _buildLearningChoices(context),
+          const SizedBox(height: 10),
+          _buildChoiceAI(context),
           const SizedBox(height: 30),
           const Text(
             "Recommend For You",
@@ -392,19 +394,130 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildLearningChoices(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _buildChoiceBox(context, "assets/images/Group 141.png", "Speaking", () {
-          Navigator.pushNamed(context, '/speaking');
-        }),
-        _buildChoiceBox(
-            context, "assets/images/Group 142.png", "Reading", () {}),
-        _buildChoiceBox(
-            context, "assets/images/Group 143.png", "Writing", () {}),
-        _buildChoiceBox(
-            context, "assets/images/Group 144.png", "Listening", () {}),
-      ],
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      width: double.maxFinite,
+      decoration: BoxDecoration(
+          color: Warna.primary1,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 2.0,
+                offset: const Offset(0, 2),
+                spreadRadius: 0.0,
+                color: Warna.netral1.withOpacity(0.07)),
+            BoxShadow(
+                blurRadius: 1.0,
+                offset: const Offset(0, 3),
+                spreadRadius: 0.0,
+                color: Warna.netral1.withOpacity(0.06)),
+            BoxShadow(
+                blurRadius: 10.0,
+                offset: const Offset(0, 1),
+                spreadRadius: 0.0,
+                color: Warna.netral1.withOpacity(0.1)),
+          ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Tipografi().S1(isiText: 'English Courses', warnaFont: Warna.netral1),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildChoiceBox(
+                  context, "assets/images/Group 141.png", "Speaking", () {
+                Navigator.pushNamed(context, '/speaking');
+              }),
+              _buildChoiceBox(
+                  context, "assets/images/Group 142.png", "Reading", () {}),
+              _buildChoiceBox(
+                  context, "assets/images/Group 143.png", "Writing", () {}),
+              _buildChoiceBox(
+                  context, "assets/images/Group 144.png", "Listening", () {}),
+            ],
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildChoiceAI(BuildContext context) {
+    final List<Map<String, String>> items = [
+      {
+        "image": "assets/images/Group 149.png",
+        "text": "Check\nGrammar",
+      },
+      {
+        "image": "assets/images/Group 148.png",
+        "text": "Chat AI",
+      },
+    ];
+
+    return GridView.builder(
+      padding: const EdgeInsets.only(top: 10),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 3,
+      ),
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Warna.primary1,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 2.0,
+                  offset: const Offset(0, 2),
+                  spreadRadius: 0.0,
+                  color: Warna.netral1.withOpacity(0.07),
+                ),
+                BoxShadow(
+                  blurRadius: 1.0,
+                  offset: const Offset(0, 3),
+                  spreadRadius: 0.0,
+                  color: Warna.netral1.withOpacity(0.06),
+                ),
+                BoxShadow(
+                  blurRadius: 10.0,
+                  offset: const Offset(0, 1),
+                  spreadRadius: 0.0,
+                  color: Warna.netral1.withOpacity(0.1),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 30,
+                  height: 30,
+                  child: Image.asset(items[index]["image"]!),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                Tipografi().S2(
+                  isiText: items[index]["text"]!,
+                  warnaFont: Warna.netral1,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
     );
   }
 

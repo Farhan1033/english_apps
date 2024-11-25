@@ -17,7 +17,6 @@ class _TalkPageState extends State<TalkPage> {
   final SpeechToText _speechToText = SpeechToText();
   bool _speechEnabled = false;
   String _lastWords = '';
-  String _resultWord = '';
   String _resultAiWord = '';
 
   @override
@@ -31,31 +30,14 @@ class _TalkPageState extends State<TalkPage> {
     setState(() {});
   }
 
-  Future<void> _sendData() async {
+  Future<void> _sendDataAI() async {
     if (_lastWords.isEmpty) return;
 
-    final talkProvider = Provider.of<TalkProvider>(context, listen: false);
-    await talkProvider.talkAI(_lastWords);
-
-    setState(() {
-      if (talkProvider.talkApi!.isCorrect == true) {
-        _resultWord =
-            "Good job. Your correct. Your statement is: ${talkProvider.talkApi!.corrected}";
-      } else if (talkProvider.talkApi!.isCorrect == false) {
-        _resultWord =
-            "Incorrect, the correct answer is: ${talkProvider.talkApi!.corrected}";
-      }
-    });
-  }
-
-  Future<void> _sendDataAI() async {
-    if (_resultWord.isEmpty) return;
-
     final talkAiProvider = Provider.of<TalkProvider>(context, listen: false);
-    await talkAiProvider.talkAiGen(talkAiProvider.talkApi!.corrected ?? '');
+    await talkAiProvider.talkAiGen(_lastWords);
 
     setState(() {
-      _resultAiWord = 'Answer: ${talkAiProvider.talkAiApi!.answer}';
+      _resultAiWord = talkAiProvider.talkAiApi!.answer!;
     });
   }
 
@@ -72,11 +54,10 @@ class _TalkPageState extends State<TalkPage> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() async {
+    setState(() {
       _lastWords = result.recognizedWords;
       if (result.finalResult) {
-        await _sendData();
-        await _sendDataAI();
+        _sendDataAI();
       }
     });
   }
@@ -84,87 +65,71 @@ class _TalkPageState extends State<TalkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Warna.primary3,
-        iconTheme: const IconThemeData(color: Warna.primary1),
-        title:
-            Tipografi().S1(isiText: 'Talk With AI', warnaFont: Warna.primary1),
-      ),
-      body: Consumer<TalkProvider>(
-        builder: (context, talkProvider, _) {
-          if (talkProvider.isLoading) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Warna.primary3,
-              ),
-            );
-          }
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
-            child: Column(
-              children: [
-                ListView.builder(
-                  itemCount: 3,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    if (index == 0) {
-                      return SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          child: messageBox(context, _resultAiWord));
-                    } else if (index == 1) {
-                      return messageBox(context, _resultWord);
-                    } else if (index == 2) {
-                      return messageBox(context, _lastWords);
-                    } else {
-                      return const SizedBox.shrink();
+        appBar: AppBar(
+          backgroundColor: Warna.primary3,
+          iconTheme: const IconThemeData(color: Warna.primary1),
+          title: Tipografi()
+              .S1(isiText: 'Talk With AI', warnaFont: Warna.primary1),
+        ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
+          child: Column(
+            children: [
+              ListView.builder(
+                itemCount: 3,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final talk = context.read<TalkProvider>();
+                  if (index == 0) {
+                    if (talk.isLoading) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
                     }
-                  },
-                ),
-                const SizedBox(height: 30),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    _buildCircleButton(
-                      icon: Icons.timelapse,
-                      tinggi: 0.15,
-                      lebar: 0.15,
-                      size: 25,
-                      onPressed: () {},
-                    ),
-                    _buildCircleButton(
-                      icon: _speechToText.isNotListening
-                          ? Icons.mic_off
-                          : Icons.mic,
-                      size: 35,
-                      tinggi: 0.25,
-                      lebar: 0.25,
-                      onPressed: _speechToText.isNotListening
-                          ? _startListening
-                          : _stopListening,
-                    ),
-                    _buildCircleButton(
-                      icon: Icons.restart_alt,
-                      size: 25,
-                      tinggi: 0.15,
-                      lebar: 0.15,
-                      onPressed: () {
-                        setState(() {
-                          _lastWords = '';
-                          _resultWord = '';
-                          _resultAiWord = '';
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    );
+                    return messageBox(context, _resultAiWord,
+                        CrossAxisAlignment.start, 'Gen-AI');
+                  } else if (index == 1) {
+                    return messageBox(
+                        context, _lastWords, CrossAxisAlignment.end, 'Me');
+                  } else {
+                    return const SizedBox.shrink();
+                  }
+                },
+              ),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  _buildCircleButton(
+                    icon: Icons.restart_alt,
+                    size: 25,
+                    tinggi: 0.15,
+                    lebar: 0.15,
+                    onPressed: () {
+                      setState(() {
+                        _lastWords = '';
+                        _resultAiWord = '';
+                      });
+                    },
+                  ),
+                  _buildCircleButton(
+                    icon: _speechToText.isNotListening
+                        ? Icons.mic_off
+                        : Icons.mic,
+                    size: 25,
+                    tinggi: 0.15,
+                    lebar: 0.15,
+                    onPressed: _speechToText.isNotListening
+                        ? _startListening
+                        : _stopListening,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget _buildCircleButton({
@@ -188,7 +153,8 @@ class _TalkPageState extends State<TalkPage> {
     );
   }
 
-  Widget messageBox(BuildContext context, String chat) {
+  Widget messageBox(BuildContext context, String chat, CrossAxisAlignment align,
+      String person) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       margin: const EdgeInsets.only(bottom: 15),
@@ -217,9 +183,9 @@ class _TalkPageState extends State<TalkPage> {
         ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: align,
         children: [
-          Tipografi().S1(isiText: 'Gen-AI', warnaFont: Warna.netral1),
+          Tipografi().S1(isiText: person, warnaFont: Warna.netral1),
           Tipografi().B2(isiText: chat, warnaFont: Warna.netral1),
         ],
       ),
