@@ -1,4 +1,3 @@
-import 'package:apps_skripsi/core/theme/button_app.dart';
 import 'package:apps_skripsi/core/theme/color_primary.dart';
 import 'package:apps_skripsi/core/theme/typography.dart';
 import 'package:apps_skripsi/features/Home/home_provider.dart';
@@ -14,7 +13,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Warna.primary3,
         title:
-            Tipografi().s1(isiText: 'Profile Page', warnaFont: Warna.primary1),
+            Tipografi().s1(isiText: 'Setting Page', warnaFont: Warna.primary1),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -23,29 +22,29 @@ class ProfilePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
           child: Column(
             children: [
-              Container(
-                width: 158,
-                height: 158,
-                decoration: const BoxDecoration(shape: BoxShape.circle),
-                child: Image.asset(
-                  'assets/images/Ellipse 8_1.png',
-                  fit: BoxFit.fill,
-                ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Tipografi().h6(isiText: 'Morgan Bruem', warnaFont: Warna.netral1),
-              const SizedBox(
-                height: 15,
-              ),
-              Tombol().primaryLarge(
-                  teksTombol: 'Edit Profile',
-                  lebarTombol: double.infinity,
-                  navigasiTombol: () {}),
-              const SizedBox(
-                height: 15,
-              ),
+              // Container(
+              //   width: 158,
+              //   height: 158,
+              //   decoration: const BoxDecoration(shape: BoxShape.circle),
+              //   child: Image.asset(
+              //     'assets/images/Ellipse 8_1.png',
+              //     fit: BoxFit.fill,
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // Tipografi().h6(isiText: 'Morgan Bruem', warnaFont: Warna.netral1),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // Tombol().primaryLarge(
+              //     teksTombol: 'Edit Profile',
+              //     lebarTombol: double.infinity,
+              //     navigasiTombol: () {}),
+              // const SizedBox(
+              //   height: 15,
+              // ),
               Expanded(
                   child: ListView.builder(
                 shrinkWrap: true,

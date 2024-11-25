@@ -46,13 +46,14 @@ class HomePage extends StatelessWidget {
                 child: Column(
               children: [
                 _buildHeader(
-                    context,
-                    home.level.toString(),
-                    home.totalPoints.toString(),
-                    (home.currentExp! / home.nextLevelExp!).toDouble(),
-                    progress?.lesson ?? '',
-                    progress?.status ?? '',
-                    (progress?.progressPercentage ?? 0).toDouble()),
+                  context,
+                  home.level.toString(),
+                  home.totalPoints.toString(),
+                  (home.currentExp! / home.nextLevelExp!).toDouble(),
+                  progress?.lesson ?? '',
+                  progress?.status ?? '',
+                  (progress?.progressPercentage ?? 0).toDouble(),
+                ),
                 _buildContent(context),
               ],
             )),
@@ -80,8 +81,15 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader(BuildContext context, String level, String poin,
-      double progress, String title, String label, double percentProgress) {
+  Widget _buildHeader(
+    BuildContext context,
+    String level,
+    String poin,
+    double progress,
+    String title,
+    String label,
+    double percentProgress,
+  ) {
     return Container(
       color: Warna.primary3,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 36),
@@ -112,7 +120,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            _buildNotificationIcon()
+            // _buildNotificationIcon()
           ],
         )
       ],
@@ -183,7 +191,7 @@ class HomePage extends StatelessWidget {
           children: [
             _buildProfilePicture(),
             const SizedBox(width: 20),
-            const Column(
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -194,10 +202,10 @@ class HomePage extends StatelessWidget {
                       color: Warna.primary1),
                 ),
                 Text(
-                  "Morgan Breum!",
+                  'Nice to meet you!',
                   style: TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 20,
+                      fontSize: 16,
                       color: Warna.primary1),
                 ),
               ],
@@ -213,11 +221,14 @@ class HomePage extends StatelessWidget {
     return Container(
       height: 62,
       width: 62,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.white,
-        image:
-            DecorationImage(image: AssetImage("assets/images/Ellipse 8.png")),
+        border: Border.all(
+            color: Warna.primary4, width: 2, style: BorderStyle.solid),
+        image: DecorationImage(
+            image: AssetImage("assets/images/profile.png"),
+            fit: BoxFit.contain),
       ),
     );
   }
@@ -245,7 +256,7 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (isSmallScreen) ...[
-                _buildCourseImage("assets/images/Property 1=Speaking.png"),
+                _buildCourseImage("assets/images/lesson.png"),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Column(
@@ -266,7 +277,7 @@ class HomePage extends StatelessWidget {
               ] else ...[
                 Row(
                   children: [
-                    _buildCourseImage("assets/images/Property 1=Speaking.png"),
+                    _buildCourseImage("assets/images/lesson.png"),
                     const SizedBox(width: 20),
                     Flexible(
                       flex: 2,

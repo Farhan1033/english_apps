@@ -1,14 +1,16 @@
 import 'package:apps_skripsi/core/models/register_api.dart';
 import 'package:apps_skripsi/core/service/register_model.dart';
 import 'package:apps_skripsi/core/theme/color_primary.dart';
+import 'package:apps_skripsi/core/utils/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 class RegisterProvider with ChangeNotifier {
   RegisterApi? _registerApi;
   final RegisterModel _registerModel = RegisterModel();
+  final Token _token = Token();
 
-  bool _keamananConfPass = false;
-  bool _keamananPass = false;
+  bool _keamananConfPass = true;
+  bool _keamananPass = true;
   bool _isLoading = false;
   String? _errorMessage;
   String? _userName;
@@ -95,6 +97,9 @@ class RegisterProvider with ChangeNotifier {
           await _registerModel.registerAPI(username, email, password);
       if (registerData != null) {
         _registerApi = registerData;
+        print(registerData.username);
+        await _token
+            .saveName(registerData.username ?? 'Username Tidak Ditemukan');
         // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, '/login');
         // ignore: use_build_context_synchronously

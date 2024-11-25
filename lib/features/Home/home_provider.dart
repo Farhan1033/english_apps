@@ -12,11 +12,13 @@ class HomeProvider with ChangeNotifier {
   ProgressApi? _progressApi;
   final GamifikasiModels _gamifikasiModels = GamifikasiModels();
   final ProgressModels _progressModels = ProgressModels();
+  String? _userName;
 
   bool get isLoading => _isLoading;
   bool get hasError => _hasError;
   GamifikasiApi? get gamifikasiApi => _gamifikasiApi;
   ProgressApi? get progressApi => _progressApi;
+  String? get userName => _userName;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -38,6 +40,16 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setName(String? value) {
+    _userName = value;
+    notifyListeners();
+  }
+
+  Future<void> getUserName() async {
+    final userName = await Token().getName();
+    setName(userName ?? '');
+  }
+
   Future<void> gamifikasi() async {
     setLoading(true);
     setError(false);
@@ -54,7 +66,7 @@ class HomeProvider with ChangeNotifier {
       setError(true);
     } finally {
       setLoading(false);
-    //  notifyListeners();
+      //  notifyListeners();
     }
   }
 
@@ -68,11 +80,11 @@ class HomeProvider with ChangeNotifier {
           await _progressModels.progressModels(token ?? 'Token tidak ada');
       if (progressLesson != null) {
         setProgressLesson(progressLesson);
-      //  notifyListeners();
+        //  notifyListeners();
       }
     } catch (e) {
       setError(true);
-     // notifyListeners();
+      // notifyListeners();
     } finally {
       setLoading(false);
       //notifyListeners();

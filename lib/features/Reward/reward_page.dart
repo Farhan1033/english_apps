@@ -220,16 +220,23 @@ class RewardPage extends StatelessWidget {
             ),
           ),
           Tombol().primarySmall(
-              teksTombol: 'Reedem',
+              teksTombol: 'Redeem',
               lebarTombol: double.infinity,
               navigasiTombol: () {
-                context.read<RewardProvider>().showDialogRedeem(
-                    context,
-                    imageItems,
-                    item.name ?? '',
-                    item.points ?? 0,
-                    item.description ?? '',
-                    item.terms ?? '');
+                // context.read<RewardProvider>().showDialogRedeem(
+                //     context,
+                //     imageItems,
+                //     item.name ?? '',
+                //     item.points ?? 0,
+                //     item.description ?? '',
+                //     item.terms ?? '');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Maaf fitur masih dalam tahap pengembangan"),
+                    backgroundColor: Warna.salah,
+                    duration: Duration(seconds: 5),
+                  ),
+                );
               })
         ],
       ),

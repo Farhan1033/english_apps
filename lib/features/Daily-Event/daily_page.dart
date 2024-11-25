@@ -12,7 +12,7 @@ class DailyPage extends StatelessWidget {
           backgroundColor: Warna.primary3,
           iconTheme: const IconThemeData(color: Warna.primary1),
           title:
-              Tipografi().S1(isiText: 'Daily Event', warnaFont: Warna.primary1),
+              Tipografi().s1(isiText: 'Daily Event', warnaFont: Warna.primary1),
         ),
         body: SingleChildScrollView(
           child: Container(
@@ -53,7 +53,7 @@ class DailyPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Tipografi().S1(
+                          Tipografi().s1(
                               isiText: 'Selesaikan 2 Sub Materi',
                               warnaFont: Warna.netral1),
                           Tipografi().C(

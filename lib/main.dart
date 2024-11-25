@@ -1,6 +1,5 @@
 import 'package:apps_skripsi/core/utils/shared_preferences.dart';
 import 'package:apps_skripsi/features/Analysis/analysis_detail_provider.dart';
-import 'package:apps_skripsi/features/Analysis/analysisi_detail_page.dart';
 import 'package:apps_skripsi/features/Chat%20AI/chat_ai_page.dart';
 import 'package:apps_skripsi/features/Chat%20AI/chat_ai_provider.dart';
 import 'package:apps_skripsi/features/Check%20Grammar/check_grammar_page.dart';
@@ -66,7 +65,6 @@ class MyApp extends StatelessWidget {
           '/summary': (context) => const SummaryPage(),
           '/daily-event': (context) => const DailyPage(),
           '/wrapper': (context) => const Wrapper(),
-          '/analysis-detail': (context) => const AnalysisDetailPage(),
           '/check-grammar': (context) => const CheckGrammarPage(),
           '/chat-ai': (context) => const ChatAiPage()
         },

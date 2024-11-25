@@ -63,7 +63,7 @@ class _WrapperState extends State<Wrapper> {
           BottomNavigationBarItem(icon: Icon(Icons.mic), label: 'Talk AI'),
           BottomNavigationBarItem(
               icon: Icon(Icons.card_giftcard), label: 'Reward'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],
       ),
     );
