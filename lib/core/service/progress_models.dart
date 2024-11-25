@@ -9,7 +9,6 @@ class ProgressModels {
     final response = await http.get(
         Uri.parse('http://${Localhost.localhost}/progress/latest'),
         headers: {'Authorization': 'Bearer $token'});
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return ProgressApi.fromJson(jsonData['data']);

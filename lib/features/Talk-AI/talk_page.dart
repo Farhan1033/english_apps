@@ -69,7 +69,7 @@ class _TalkPageState extends State<TalkPage> {
           backgroundColor: Warna.primary3,
           iconTheme: const IconThemeData(color: Warna.primary1),
           title: Tipografi()
-              .S1(isiText: 'Talk With AI', warnaFont: Warna.primary1),
+              .s1(isiText: 'Talk With AI', warnaFont: Warna.primary1),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
@@ -185,8 +185,8 @@ class _TalkPageState extends State<TalkPage> {
       child: Column(
         crossAxisAlignment: align,
         children: [
-          Tipografi().S1(isiText: person, warnaFont: Warna.netral1),
-          Tipografi().B2(isiText: chat, warnaFont: Warna.netral1),
+          Tipografi().s1(isiText: person, warnaFont: Warna.netral1),
+          Tipografi().b2(isiText: chat, warnaFont: Warna.netral1),
         ],
       ),
     );

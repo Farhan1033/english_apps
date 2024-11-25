@@ -51,7 +51,7 @@ class RewardProvider with ChangeNotifier {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Tipografi().S2(
+                    Tipografi().s2(
                       isiText: title,
                       warnaFont: Warna.netral1,
                     ),
@@ -78,7 +78,7 @@ class RewardProvider with ChangeNotifier {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Tipografi().S2(
+                Tipografi().s2(
                   isiText: 'Description Item',
                   warnaFont: Warna.netral1,
                 ),
@@ -88,7 +88,7 @@ class RewardProvider with ChangeNotifier {
                   warnaFont: Warna.netral1,
                 ),
                 const SizedBox(height: 8),
-                Tipografi().S2(
+                Tipografi().s2(
                   isiText: 'Term Item',
                   warnaFont: Warna.netral1,
                 ),
@@ -107,7 +107,7 @@ class RewardProvider with ChangeNotifier {
                 navigasiTombol: () {
                   Navigator.pop(context);
                 }),
-            Tombol().PrimarySmall(
+            Tombol().primarySmall(
                 teksTombol: 'Redeem',
                 lebarTombol: double.infinity,
                 navigasiTombol: () {}),

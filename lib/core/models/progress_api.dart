@@ -12,10 +12,10 @@ class ProgressApi {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['progress_percentage'] = this.progressPercentage;
-    data['lesson'] = this.lesson;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['status'] = status;
+    data['progress_percentage'] = progressPercentage;
+    data['lesson'] = lesson;
     return data;
   }
 }

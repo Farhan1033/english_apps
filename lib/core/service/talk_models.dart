@@ -9,7 +9,6 @@ class TalkModels {
         Uri.parse('https://adenht-cek-grammar.hf.space/check-grammar'),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({'sentence': sentences}));
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return TalkApi.fromJson(jsonData);

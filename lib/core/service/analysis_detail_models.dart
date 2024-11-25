@@ -9,7 +9,6 @@ class AnalysisDetailModels {
     final response = await http.get(
         Uri.parse('http://${Localhost.localhost}/courses/summary'),
         headers: {'Authorization': 'Bearer $token'});
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return AnalysisDetailApi.fromJson(jsonData);

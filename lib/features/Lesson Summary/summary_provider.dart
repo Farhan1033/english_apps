@@ -12,7 +12,7 @@ class SummaryProvider with ChangeNotifier {
   String? _errorMessage;
   SummaryApi? _summaryApi;
   final SummaryModels _summaryModels = SummaryModels();
-  EventLessonModels _eventLessonModels = EventLessonModels();
+  final EventLessonModels _eventLessonModels = EventLessonModels();
 
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
@@ -45,8 +45,10 @@ class SummaryProvider with ChangeNotifier {
 
     try {
       final token = await Token().getToken();
+      // ignore: use_build_context_synchronously
       final lesson = Provider.of<LessonProvider>(context, listen: false);
       final idCourse =
+          // ignore: use_build_context_synchronously
           Provider.of<CourseProvider>(context, listen: false).idCourses;
       if (lesson.lessonApi!.summary!.isCompleted == false) {
         await _eventLessonModels.eventExcerciseCompleted(

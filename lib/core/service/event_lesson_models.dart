@@ -15,7 +15,6 @@ class EventLessonModels {
           'course_id': idCourse,
           'event_type': eventType
         }));
-
     if (respons.statusCode == 200) {
       final jsonData = jsonDecode(respons.body);
       return EventLesson.fromJson(jsonData['data']);

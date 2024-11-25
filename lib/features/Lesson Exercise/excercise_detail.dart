@@ -20,7 +20,7 @@ class ExcerciseDetail extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Warna.primary3,
           title: Tipografi()
-              .S1(isiText: 'Score Exercise', warnaFont: Warna.primary1),
+              .s1(isiText: 'Score Exercise', warnaFont: Warna.primary1),
         ),
         body: Consumer<ExerciseProvider>(
           builder: (context, exerciseProvider, _) {
@@ -72,7 +72,7 @@ class ExcerciseDetail extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Tipografi().H6(
+                      Tipografi().h6(
                           isiText: exerciseProvider.totalGrade! >= 75
                               ? 'Good job'
                               : 'Try Again',
@@ -84,14 +84,14 @@ class ExcerciseDetail extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Tipografi().S1(
+                      Tipografi().s1(
                           isiText: 'Score: ${exerciseProvider.totalGrade}',
                           warnaFont: Warna.netral1),
                       const SizedBox(
                         height: 10,
                       ),
                       if (exerciseProvider.totalGrade! < 75)
-                        Tombol().PrimarySmall(
+                        Tombol().primarySmall(
                             teksTombol: 'Retry',
                             lebarTombol: double.maxFinite,
                             navigasiTombol: () {
@@ -103,7 +103,7 @@ class ExcerciseDetail extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Tombol().OutLineSmall(
+                      Tombol().outLineSmall(
                           teksTombol: 'Back To Lesson',
                           lebarTombol: double.maxFinite,
                           navigasiTombol: () {

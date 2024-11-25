@@ -90,7 +90,7 @@ class RegisterPage extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  Tombol().PrimaryLarge(
+                  Tombol().primaryLarge(
                     teksTombol: "Daftar",
                     lebarTombol: double.maxFinite,
                     navigasiTombol: () {
@@ -107,7 +107,7 @@ class RegisterPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Tipografi().S2(
+                      Tipografi().s2(
                           isiText: "Sudah Punya Akun?",
                           warnaFont: Warna.netral1),
                       Tombol().TextLarge(

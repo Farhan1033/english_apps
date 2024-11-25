@@ -14,28 +14,28 @@ class LessonApi {
 
   LessonApi.fromJson(Map<String, dynamic> json) {
     lessonName = json['lesson_name'];
-    video = json['video'] != null ? new Video.fromJson(json['video']) : null;
+    video = json['video'] != null ? Video.fromJson(json['video']) : null;
     exercise = json['exercise'] != null
-        ? new Exercise.fromJson(json['exercise'])
+        ? Exercise.fromJson(json['exercise'])
         : null;
     summary =
-        json['summary'] != null ? new Summary.fromJson(json['summary']) : null;
+        json['summary'] != null ? Summary.fromJson(json['summary']) : null;
     totalProgress = json['total_progress'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['lesson_name'] = this.lessonName;
-    if (this.video != null) {
-      data['video'] = this.video!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['lesson_name'] = lessonName;
+    if (video != null) {
+      data['video'] = video!.toJson();
     }
-    if (this.exercise != null) {
-      data['exercise'] = this.exercise!.toJson();
+    if (exercise != null) {
+      data['exercise'] = exercise!.toJson();
     }
-    if (this.summary != null) {
-      data['summary'] = this.summary!.toJson();
+    if (summary != null) {
+      data['summary'] = summary!.toJson();
     }
-    data['total_progress'] = this.totalProgress;
+    data['total_progress'] = totalProgress;
     return data;
   }
 }
@@ -69,14 +69,14 @@ class Video {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['video_id'] = this.videoId;
-    data['video_title'] = this.videoTitle;
-    data['video_description'] = this.videoDescription;
-    data['video_url'] = this.videoUrl;
-    data['video_exp'] = this.videoExp;
-    data['video_point'] = this.videoPoint;
-    data['is_completed'] = this.isCompleted;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['video_id'] = videoId;
+    data['video_title'] = videoTitle;
+    data['video_description'] = videoDescription;
+    data['video_url'] = videoUrl;
+    data['video_exp'] = videoExp;
+    data['video_point'] = videoPoint;
+    data['is_completed'] = isCompleted;
     return data;
   }
 }
@@ -101,11 +101,11 @@ class Exercise {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['exercise_id'] = this.exerciseId;
-    data['exercise_exp'] = this.exerciseExp;
-    data['exercise_point'] = this.exercisePoint;
-    data['is_completed'] = this.isCompleted;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['exercise_id'] = exerciseId;
+    data['exercise_exp'] = exerciseExp;
+    data['exercise_point'] = exercisePoint;
+    data['is_completed'] = isCompleted;
     return data;
   }
 }
@@ -130,11 +130,11 @@ class Summary {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['summary_id'] = this.summaryId;
-    data['summary_description'] = this.summaryDescription;
-    data['is_completed'] = this.isCompleted;
-    data['summary_url'] = this.summaryUrl;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['summary_id'] = summaryId;
+    data['summary_description'] = summaryDescription;
+    data['is_completed'] = isCompleted;
+    data['summary_url'] = summaryUrl;
     return data;
   }
 }

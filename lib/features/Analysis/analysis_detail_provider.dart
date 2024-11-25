@@ -31,7 +31,6 @@ class AnalysisDetailProvider with ChangeNotifier {
   Future<void> analysisDetail() async {
     setLoading(true);
     setError(false);
-
     try {
       final token = await Token().getToken();
       final analysisData = await _analysisDetailModels

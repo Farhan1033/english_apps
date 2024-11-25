@@ -20,19 +20,19 @@ class CourseApi {
     if (json['list_lessons'] != null) {
       listLessons = <ListLessons>[];
       json['list_lessons'].forEach((v) {
-        listLessons!.add(new ListLessons.fromJson(v));
+        listLessons!.add(ListLessons.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['courses_name'] = this.coursesName;
-    data['description'] = this.description;
-    data['progress'] = this.progress;
-    data['course_id'] = this.courseId;
-    if (this.listLessons != null) {
-      data['list_lessons'] = this.listLessons!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['courses_name'] = coursesName;
+    data['description'] = description;
+    data['progress'] = progress;
+    data['course_id'] = courseId;
+    if (listLessons != null) {
+      data['list_lessons'] = listLessons!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -55,11 +55,11 @@ class ListLessons {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id_lesson'] = this.idLesson;
-    data['lessons_name'] = this.lessonsName;
-    data['description'] = this.description;
-    data['progress'] = this.progress;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id_lesson'] = idLesson;
+    data['lessons_name'] = lessonsName;
+    data['description'] = description;
+    data['progress'] = progress;
     return data;
   }
 }

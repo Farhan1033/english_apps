@@ -10,6 +10,7 @@ class CoursePage extends StatefulWidget {
   const CoursePage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CoursePageState createState() => _CoursePageState();
 }
 
@@ -38,7 +39,7 @@ class _CoursePageState extends State<CoursePage> {
     return Scaffold(
       appBar: AppBar(
         title: Tipografi()
-            .S1(isiText: "Courses - Speaking", warnaFont: Warna.primary1),
+            .s1(isiText: "Courses - Speaking", warnaFont: Warna.primary1),
         backgroundColor: Warna.primary3,
         iconTheme: const IconThemeData(color: Warna.primary1),
       ),
@@ -125,7 +126,7 @@ class _CoursePageState extends State<CoursePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Flexible(
-                          child: Tipografi().S2(
+                          child: Tipografi().s2(
                               isiText: courses.coursesName ?? '',
                               warnaFont: Warna.primary1),
                         ),
@@ -141,8 +142,8 @@ class _CoursePageState extends State<CoursePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Tipografi()
-                            .S2(isiText: "Progress", warnaFont: Warna.primary1),
-                        Tipografi().B2(
+                            .s2(isiText: "Progress", warnaFont: Warna.primary1),
+                        Tipografi().b2(
                             isiText: "${courses.progress}%",
                             warnaFont: Warna.primary1),
                       ],
@@ -241,7 +242,7 @@ class _CoursePageState extends State<CoursePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Tipografi().S1(
+                        Tipografi().s1(
                           isiText: lesson.lessonsName ?? '',
                           warnaFont: Warna.netral1,
                         ),
@@ -265,7 +266,7 @@ class _CoursePageState extends State<CoursePage> {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            Tipografi().B2(
+                            Tipografi().b2(
                               isiText: "${lesson.progress}%",
                               warnaFont: Warna.netral1,
                             ),

@@ -8,7 +8,6 @@ class VideoModels {
   Future<VideoApi?> video(String idVideo, String token) async{
     final response = await http.get(Uri.parse('http://${Localhost.localhost}/video-parts/$idVideo'),
     headers: {'Authorization' : 'Bearer $token'});
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return VideoApi.fromJson(jsonData['data']);

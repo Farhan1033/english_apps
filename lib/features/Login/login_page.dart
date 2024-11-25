@@ -42,7 +42,6 @@ class _LoginPageState extends State<LoginPage> {
             border:
                 OutlineInputBorder(borderRadius: BorderRadius.circular(8))));
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -14,11 +14,11 @@ class EventLesson {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['user_id'] = this.userId;
-    data['lesson_id'] = this.lessonId;
-    data['course_id'] = this.courseId;
-    data['event_type'] = this.eventType;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['user_id'] = userId;
+    data['lesson_id'] = lessonId;
+    data['course_id'] = courseId;
+    data['event_type'] = eventType;
     return data;
   }
 }

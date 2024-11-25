@@ -15,11 +15,11 @@ class GamifikasiApi {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['level'] = this.level;
-    data['current_exp'] = this.currentExp;
-    data['next_level_exp'] = this.nextLevelExp;
-    data['total_points'] = this.totalPoints;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['level'] = level;
+    data['current_exp'] = currentExp;
+    data['next_level_exp'] = nextLevelExp;
+    data['total_points'] = totalPoints;
     return data;
   }
 }

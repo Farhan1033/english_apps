@@ -7,8 +7,8 @@ class SummaryModels {
   Future<SummaryApi?> summary(String idSummary, String token) async {
     final respons = await http.get(
         Uri.parse(
-            "http://${Localhost.localhost}/summary/${idSummary}"),
-        headers: {'Authorization': 'Bearer ${token}'});
+            "http://${Localhost.localhost}/summary/$idSummary"),
+        headers: {'Authorization': 'Bearer $token'});
 
     if (respons.statusCode == 200) {
       final jsonData = jsonDecode(respons.body);

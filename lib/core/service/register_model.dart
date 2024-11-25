@@ -17,7 +17,6 @@ class RegisterModel {
           'password': password,
           'role': 'user'
         }));
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       return RegisterApi?.fromJson(jsonData['data']);

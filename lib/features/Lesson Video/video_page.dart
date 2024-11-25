@@ -37,6 +37,7 @@ class _VideoPageState extends State<VideoPage> {
 
   Future<void> getVideoApi() async {
     final token = await Token().getToken();
+    // ignore: use_build_context_synchronously
     final idVideo = ModalRoute.of(context)?.settings.arguments.toString();
     final response = await http.get(
       Uri.parse("http://${Localhost.localhost}/video-parts/$idVideo"),
@@ -51,14 +52,15 @@ class _VideoPageState extends State<VideoPage> {
       });
       initializeVideoPlayer();
     } else {
-      print("Error: ${response.body}");
     }
   }
 
   Future<void> videoCompleted() async {
     final token = await Token().getToken();
+    // ignore: use_build_context_synchronously
     final lesson = Provider.of<LessonProvider>(context, listen: false).idLesson;
     final course =
+        // ignore: use_build_context_synchronously
         Provider.of<CourseProvider>(context, listen: false).idCourses;
     final respons = await http.put(
         Uri.parse('http://${Localhost.localhost}/update_progress_lesson'),
@@ -70,7 +72,6 @@ class _VideoPageState extends State<VideoPage> {
       final jsonData = jsonDecode(respons.body);
       eventLesson = EventLesson.fromJson(jsonData['data']);
     } else {
-      print('Error: ${respons.body}');
     }
   }
 
@@ -125,11 +126,11 @@ class _VideoPageState extends State<VideoPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Tipografi().S1(
+          title: Tipografi().s1(
               isiText: "Video Telah Selesai Ditonton",
               warnaFont: Warna.netral1),
           content: Container(
-            child: Tipografi().B2(
+            child: Tipografi().b2(
                 isiText: "Klik Next Untuk Melanjutkan",
                 warnaFont: Warna.netral1),
           ),
@@ -142,7 +143,7 @@ class _VideoPageState extends State<VideoPage> {
             ),
             Consumer<LessonProvider>(
               builder: (context, lessonProvider, _) {
-                return Tombol().PrimarySmall(
+                return Tombol().primarySmall(
                   teksTombol: "Next",
                   lebarTombol: double.infinity,
                   navigasiTombol: () {
@@ -153,6 +154,7 @@ class _VideoPageState extends State<VideoPage> {
                         () {
                           getVideoApi();
                           Navigator.popUntil(
+                              // ignore: use_build_context_synchronously
                               context, ModalRoute.withName('/lesson'));
                         },
                       );
@@ -224,23 +226,23 @@ class _VideoPageState extends State<VideoPage> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Tipografi().H6(
+                              Tipografi().h6(
                                   isiText:
                                       videoApi?.title ?? "Video Tidak Tersedia",
                                   warnaFont: Warna.netral1),
                               const SizedBox(height: 16),
-                              Tipografi().S1(
+                              Tipografi().s1(
                                   isiText: 'Description',
                                   warnaFont: Warna.netral1),
                               const SizedBox(height: 8),
-                              Tipografi().B2(
+                              Tipografi().b2(
                                   isiText: videoApi?.description ??
                                       "Video Tidak Tersedia",
                                   warnaFont: Warna.netral1),
                             ],
                           ),
                           if (isFinish)
-                            Tombol().PrimaryLarge(
+                            Tombol().primaryLarge(
                               teksTombol: "Finish",
                               lebarTombol: double.maxFinite,
                               navigasiTombol: () {

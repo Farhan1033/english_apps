@@ -12,7 +12,7 @@ class LoginApi {
     role = json['role'];
     token = json['token'];
   }
-
+  
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['email'] = email;

@@ -32,7 +32,6 @@ class ExerciseProvider with ChangeNotifier {
     if (_exerciseApi == null) {
       return 'Belum ada nilai';
     }
-
     _totalGrade = (_gradeExercise / _exerciseApi!.quiz!.length) * 100;
     return _totalGrade! >= 75 ? 'Lulus' : 'Tidak Lulus';
   }

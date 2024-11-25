@@ -11,15 +11,15 @@ class RewardApi {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['status_code'] = this.statusCode;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['status_code'] = statusCode;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -45,12 +45,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['points'] = this.points;
-    data['description'] = this.description;
-    data['terms'] = this.terms;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['points'] = points;
+    data['description'] = description;
+    data['terms'] = terms;
     return data;
   }
 }

@@ -44,7 +44,6 @@ class CheckGrammarProvider with ChangeNotifier {
   Future<void> checkGrammar(String sentences) async {
     setLoading(true);
     setError(null);
-
     try {
       final checkData = await _talkModels.talkModels(sentences);
 

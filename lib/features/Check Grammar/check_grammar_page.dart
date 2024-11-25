@@ -15,7 +15,7 @@ class CheckGrammarPage extends StatelessWidget {
         backgroundColor: Warna.primary3,
         iconTheme: IconThemeData(color: Warna.primary1),
         title:
-            Tipografi().S1(isiText: 'Check Grammar', warnaFont: Warna.primary1),
+            Tipografi().s1(isiText: 'Check Grammar', warnaFont: Warna.primary1),
       ),
       body: Consumer<CheckGrammarProvider>(
         builder: (context, checkGrammarProvider, child) {
@@ -146,8 +146,8 @@ class CheckGrammarPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: align,
         children: [
-          Tipografi().S1(isiText: person, warnaFont: Warna.netral1),
-          Tipografi().B2(isiText: chat, warnaFont: Warna.netral1),
+          Tipografi().s1(isiText: person, warnaFont: Warna.netral1),
+          Tipografi().b2(isiText: chat, warnaFont: Warna.netral1),
         ],
       ),
     );

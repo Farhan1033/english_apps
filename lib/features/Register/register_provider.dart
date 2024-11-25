@@ -1,7 +1,6 @@
 import 'package:apps_skripsi/core/models/register_api.dart';
 import 'package:apps_skripsi/core/service/register_model.dart';
 import 'package:apps_skripsi/core/theme/color_primary.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RegisterProvider with ChangeNotifier {
@@ -96,7 +95,9 @@ class RegisterProvider with ChangeNotifier {
           await _registerModel.registerAPI(username, email, password);
       if (registerData != null) {
         _registerApi = registerData;
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, '/login');
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text("Registrasi berhasil!"),
@@ -106,6 +107,7 @@ class RegisterProvider with ChangeNotifier {
         clearData();
       } else {
         _errorMessage = 'Gagal mendaftarkan akun';
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(_errorMessage!),
@@ -115,6 +117,7 @@ class RegisterProvider with ChangeNotifier {
       }
     } catch (e) {
       _errorMessage = e.toString();
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Terjadi kesalahan: $_errorMessage"),
@@ -139,7 +142,6 @@ class RegisterProvider with ChangeNotifier {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     namaController.dispose();
     emailController.dispose();

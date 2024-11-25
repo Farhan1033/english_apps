@@ -20,13 +20,13 @@ class LessonProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> lessonFetch(String id_courses) async {
+  Future<void> lessonFetch(String idCourses) async {
     _isLoading = true;
     _errorMessage = null;
 
     try {
       final token = await Token().getToken();
-      final lessonData = await _lessonModels.lessonAPI(id_courses, token ?? '');
+      final lessonData = await _lessonModels.lessonAPI(idCourses, token ?? '');
       if (lessonData != null) {
         _lessonApi = lessonData;
       }

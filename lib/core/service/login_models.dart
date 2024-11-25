@@ -16,7 +16,6 @@ class LoginService {
         'password': password,
       }),
     );
-
     if (response.statusCode == 200 || response.statusCode == 201) {
       final jsonData = jsonDecode(response.body);
       return LoginApi.fromJson(jsonData['data']);

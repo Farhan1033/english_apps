@@ -130,7 +130,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Tipografi().S2(isiText: 'Level $level', warnaFont: Warna.netral1),
+          Tipografi().s2(isiText: 'Level $level', warnaFont: Warna.netral1),
           const SizedBox(
             height: 5,
           ),
@@ -159,7 +159,7 @@ class HomePage extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          Tipografi().S2(isiText: poin, warnaFont: Warna.netral1)
+          Tipografi().s2(isiText: poin, warnaFont: Warna.netral1)
         ],
       ),
     );
@@ -253,7 +253,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       _buildOngoingLabel(label),
                       const SizedBox(height: 5.0),
-                      Tipografi().S1(
+                      Tipografi().s1(
                           isiText: title,
                           warnaFont: Warna.netral1,
                           oververFlow: TextOverflow.ellipsis,
@@ -275,7 +275,7 @@ class HomePage extends StatelessWidget {
                         children: [
                           _buildOngoingLabel(label),
                           const SizedBox(height: 5.0),
-                          Tipografi().S1(
+                          Tipografi().s1(
                               isiText: title,
                               warnaFont: Warna.netral1,
                               oververFlow: TextOverflow.ellipsis,
@@ -420,7 +420,7 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Tipografi().S1(isiText: 'English Courses', warnaFont: Warna.netral1),
+          Tipografi().s1(isiText: 'English Courses', warnaFont: Warna.netral1),
           const SizedBox(
             height: 15,
           ),
@@ -526,7 +526,7 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            Tipografi().S2(
+            Tipografi().s2(
               isiText: items[index]["text"]!,
               warnaFont: Warna.netral1,
             ),
@@ -641,9 +641,9 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Tipografi().S1(isiText: title, warnaFont: Warna.netral1),
+        Tipografi().s1(isiText: title, warnaFont: Warna.netral1),
         const SizedBox(height: 5.0),
-        Tipografi().B2(isiText: description, warnaFont: Warna.netral1),
+        Tipografi().b2(isiText: description, warnaFont: Warna.netral1),
       ],
     );
   }

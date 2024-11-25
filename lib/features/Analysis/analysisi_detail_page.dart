@@ -17,7 +17,7 @@ class AnalysisDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Tipografi()
-            .S1(isiText: "Analysis Detail", warnaFont: Warna.primary1),
+            .s1(isiText: "Analysis Detail", warnaFont: Warna.primary1),
         backgroundColor: Warna.primary3,
         iconTheme: const IconThemeData(color: Warna.primary1),
       ),
@@ -87,7 +87,7 @@ class AnalysisDetailPage extends StatelessWidget {
         children: [
           _buildRowContent(context, item, imageCourse),
           const SizedBox(height: 10),
-          Tipografi().S1(isiText: 'Skill Level', warnaFont: Warna.netral1),
+          Tipografi().s1(isiText: 'Skill Level', warnaFont: Warna.netral1),
           const SizedBox(height: 5),
           _buildColumnSkillLevel(context, item.progress ?? []),
         ],
@@ -99,7 +99,7 @@ class AnalysisDetailPage extends StatelessWidget {
       BuildContext context, Data analysis, String imageCourse) {
     return Row(
       children: [
-        Container(
+        SizedBox(
           width: MediaQuery.of(context).size.width * 0.2,
           height: MediaQuery.of(context).size.width * 0.2,
           child: Image.asset(imageCourse, fit: BoxFit.contain),
@@ -110,9 +110,9 @@ class AnalysisDetailPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Tipografi()
-                  .H6(isiText: analysis.course ?? '', warnaFont: Warna.netral1),
+                  .h6(isiText: analysis.course ?? '', warnaFont: Warna.netral1),
               const SizedBox(height: 5),
-              Tipografi().B2(
+              Tipografi().b2(
                   isiText: analysis.description ?? '',
                   warnaFont: Warna.netral1),
             ],
@@ -142,8 +142,8 @@ class AnalysisDetailPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Tipografi().B2(isiText: category, warnaFont: Warna.netral1),
-              Tipografi().B2(
+              Tipografi().b2(isiText: category, warnaFont: Warna.netral1),
+              Tipografi().b2(
                   isiText: '${progressPercentage.toString()}%',
                   warnaFont: Warna.netral1),
             ],

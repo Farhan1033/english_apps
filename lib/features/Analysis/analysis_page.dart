@@ -107,7 +107,7 @@ class AnalysisPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Tipografi().S2(
+          Tipografi().s2(
               isiText: 'Level ${level.toString()}', warnaFont: Warna.netral1),
           const SizedBox(
             height: 5,
@@ -137,7 +137,7 @@ class AnalysisPage extends StatelessWidget {
           const SizedBox(
             width: 5,
           ),
-          Tipografi().S2(isiText: poin.toString(), warnaFont: Warna.netral1)
+          Tipografi().s2(isiText: poin.toString(), warnaFont: Warna.netral1)
         ],
       ),
     );
@@ -246,7 +246,7 @@ class AnalysisPage extends StatelessWidget {
             reverse: true,
             progressColor: Warna.primary4,
             backgroundColor: Warna.netral1.withOpacity(0.2),
-            center: Tipografi().S1(isiText: '90%', warnaFont: Warna.netral1),
+            center: Tipografi().s1(isiText: '90%', warnaFont: Warna.netral1),
           ),
         ),
         _buildListSkillView(context)

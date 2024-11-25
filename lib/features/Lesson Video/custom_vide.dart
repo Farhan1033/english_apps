@@ -1,13 +1,23 @@
 import 'dart:async';
+// ignore: implementation_imports
 import 'package:chewie/src/center_play_button.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/chewie_player.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/chewie_progress_colors.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/helpers/utils.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/material/material_progress_bar.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/material/widgets/options_dialog.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/material/widgets/playback_speed_dialog.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/models/option_item.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/models/subtitle_model.dart';
+// ignore: implementation_imports
 import 'package:chewie/src/notifiers/index.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -580,19 +590,6 @@ class _CustomMaterialControlsState extends State<CustomMaterialControls>
     });
   }
 
-  void _seekRelative(Duration relativeSeek) {
-    _cancelAndRestartTimer();
-    final position = _latestValue.position + relativeSeek;
-    final duration = _latestValue.duration;
-
-    if (position < Duration.zero) {
-      controller.seekTo(Duration.zero);
-    } else if (position > duration) {
-      controller.seekTo(duration);
-    } else {
-      controller.seekTo(position);
-    }
-  }
 
   // void _seekBackward() {
   //   _seekRelative(

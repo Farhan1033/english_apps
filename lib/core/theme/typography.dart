@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Tipografi {
-  Widget H1({required String isiText, required Color warnaFont}) {
+  Widget h1({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(
@@ -12,7 +12,7 @@ class Tipografi {
     );
   }
 
-  Widget H2({required String isiText, required Color warnaFont}) {
+  Widget h2({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(
@@ -23,7 +23,7 @@ class Tipografi {
     );
   }
 
-  Widget H3({required String isiText, required Color warnaFont}) {
+  Widget h3({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(
@@ -34,7 +34,7 @@ class Tipografi {
     );
   }
 
-  Widget H4({required String isiText, required Color warnaFont}) {
+  Widget h4({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(
@@ -45,7 +45,7 @@ class Tipografi {
     );
   }
 
-  Widget H5({required String isiText, required Color warnaFont}) {
+  Widget h5({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(
@@ -56,7 +56,7 @@ class Tipografi {
     );
   }
 
-  Widget H6({
+  Widget h6({
     required String isiText,
     required Color warnaFont,
   }) {
@@ -70,7 +70,7 @@ class Tipografi {
     );
   }
 
-  Widget S1(
+  Widget s1(
       {required String isiText,
       required Color warnaFont,
       TextOverflow? oververFlow,
@@ -87,7 +87,7 @@ class Tipografi {
     );
   }
 
-  Widget S2(
+  Widget s2(
       {required String isiText,
       required Color warnaFont,
       TextOverflow? oververFlow,
@@ -104,7 +104,7 @@ class Tipografi {
     );
   }
 
-  Widget B1(
+  Widget b1(
       {required String isiText,
       required Color warnaFont,
       TextOverflow? oververFlow,
@@ -121,7 +121,7 @@ class Tipografi {
     );
   }
 
-  Widget B2(
+  Widget b2(
       {required String isiText,
       required Color warnaFont,
       TextOverflow? oververFlow,
@@ -138,7 +138,7 @@ class Tipografi {
     );
   }
 
-  Widget FontButton({required String isiText, required Color warnaFont}) {
+  Widget fontButton({required String isiText, required Color warnaFont}) {
     return Text(
       isiText,
       style: TextStyle(

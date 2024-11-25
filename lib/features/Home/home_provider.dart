@@ -49,7 +49,6 @@ class HomeProvider with ChangeNotifier {
           await _gamifikasiModels.gamifikasiModel(token ?? 'Token not found');
       if (gamifikasiData != null) {
         setGamifikasiAPI(gamifikasiData);
-       // notifyListeners();
       }
     } catch (e) {
       setError(true);

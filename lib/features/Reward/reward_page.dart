@@ -21,7 +21,7 @@ class RewardPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Warna.primary3,
         title:
-            Tipografi().S1(isiText: 'Reward Page', warnaFont: Warna.primary1),
+            Tipografi().s1(isiText: 'Reward Page', warnaFont: Warna.primary1),
       ),
       body: SingleChildScrollView(
         child: Consumer<RewardProvider>(
@@ -44,7 +44,7 @@ class RewardPage extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
-                    child: Tipografi().H6(
+                    child: Tipografi().h6(
                         isiText: 'Tukarkan Poin Anda Sekarang Juga',
                         warnaFont: Warna.netral1),
                   ),
@@ -56,11 +56,11 @@ class RewardPage extends StatelessWidget {
                     height: 15,
                   ),
                   Tipografi()
-                      .H6(isiText: 'Pilih Hadiah', warnaFont: Warna.netral1),
+                      .h6(isiText: 'Pilih Hadiah', warnaFont: Warna.netral1),
                   const SizedBox(
                     height: 5,
                   ),
-                  Tipografi().B2(
+                  Tipografi().b2(
                       isiText: 'Tukar hadiah sesuai jumlah poin yang tersedia',
                       warnaFont: Warna.netral1),
                   const SizedBox(
@@ -153,8 +153,8 @@ class RewardPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Tipografi()
-                          .B1(isiText: 'Poin Anda', warnaFont: Warna.netral1),
-                      Tipografi().H6(
+                          .b1(isiText: 'Poin Anda', warnaFont: Warna.netral1),
+                      Tipografi().h6(
                           isiText: '${gamifikasi!.totalPoints.toString()} poin',
                           warnaFont: Warna.netral1)
                     ],
@@ -212,14 +212,14 @@ class RewardPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Tipografi().B2(isiText: item.name!, warnaFont: Warna.netral1),
-                Tipografi().S1(
+                Tipografi().b2(isiText: item.name!, warnaFont: Warna.netral1),
+                Tipografi().s1(
                     isiText: '${item.points!.toString()} poin',
                     warnaFont: Warna.netral1)
               ],
             ),
           ),
-          Tombol().PrimarySmall(
+          Tombol().primarySmall(
               teksTombol: 'Reedem',
               lebarTombol: double.infinity,
               navigasiTombol: () {

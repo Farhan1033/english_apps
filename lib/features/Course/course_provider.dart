@@ -34,7 +34,6 @@ class CourseProvider with ChangeNotifier {
   Future<void> fetchCourse(String categoryCourses) async {
     _isLoading = true;
     _errorMessage = null;
-
     try {
       final token = await Token().getToken();
       final fetchedCourse =

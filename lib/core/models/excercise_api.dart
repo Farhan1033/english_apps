@@ -20,19 +20,19 @@ class ExcerciseApi {
     if (json['quiz'] != null) {
       quiz = <Quiz>[];
       json['quiz'].forEach((v) {
-        quiz!.add(new Quiz.fromJson(v));
+        quiz!.add(Quiz.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['exercise_id'] = this.exerciseId;
-    data['exercise_duration'] = this.exerciseDuration;
-    data['exercise_exp'] = this.exerciseExp;
-    data['exercise_poin'] = this.exercisePoin;
-    if (this.quiz != null) {
-      data['quiz'] = this.quiz!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['exercise_id'] = exerciseId;
+    data['exercise_duration'] = exerciseDuration;
+    data['exercise_exp'] = exerciseExp;
+    data['exercise_poin'] = exercisePoin;
+    if (quiz != null) {
+      data['quiz'] = quiz!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -52,10 +52,10 @@ class Quiz {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['question'] = this.question;
-    data['answer'] = this.answer;
-    data['correct_answer'] = this.correctAnswer;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['question'] = question;
+    data['answer'] = answer;
+    data['correct_answer'] = correctAnswer;
     return data;
   }
 }

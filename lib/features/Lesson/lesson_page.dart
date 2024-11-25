@@ -23,7 +23,7 @@ class LessonPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title:
-            Tipografi().S1(isiText: 'Lesson Page', warnaFont: Warna.primary1),
+            Tipografi().s1(isiText: 'Lesson Page', warnaFont: Warna.primary1),
         backgroundColor: Warna.primary3,
         iconTheme: const IconThemeData(color: Warna.primary1),
       ),
@@ -80,7 +80,7 @@ class LessonPage extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Tipografi().H6(
+                                  Tipografi().h6(
                                       isiText: lesson!.lessonName ?? "",
                                       warnaFont: Warna.primary1),
                                   const SizedBox(
@@ -147,10 +147,10 @@ class LessonPage extends StatelessWidget {
                               Navigator.pushNamed(context, '/video',
                                   arguments: lesson.video!.videoId ?? '');
                             },
-                            is_completed: lesson.video?.isCompleted ?? false,
-                            data_exp: lesson.video?.videoExp.toString(),
-                            data_point: lesson.video?.videoPoint.toString(),
-                            data_title: lesson.video?.videoTitle ?? "",
+                            isCompleted: lesson.video?.isCompleted ?? false,
+                            dataExp: lesson.video?.videoExp.toString(),
+                            dataPoint: lesson.video?.videoPoint.toString(),
+                            dataTitle: lesson.video?.videoTitle ?? "",
                           );
                         } else if (index == 1) {
                           return selectedLesson(
@@ -158,11 +158,11 @@ class LessonPage extends StatelessWidget {
                               Navigator.pushNamed(context, '/excercise',
                                   arguments: lesson.exercise!.exerciseId);
                             },
-                            is_completed: lesson.exercise?.isCompleted ?? false,
-                            data_exp: lesson.exercise?.exerciseExp.toString(),
-                            data_point:
+                            isCompleted: lesson.exercise?.isCompleted ?? false,
+                            dataExp: lesson.exercise?.exerciseExp.toString(),
+                            dataPoint:
                                 lesson.exercise?.exercisePoint.toString(),
-                            data_title: "Exercise",
+                            dataTitle: "Exercise",
                           );
                         } else if (index == 2) {
                           return selectedLesson(
@@ -173,8 +173,8 @@ class LessonPage extends StatelessWidget {
                                 arguments: lesson.summary!.summaryId,
                               );
                             },
-                            is_completed: lesson.summary?.isCompleted ?? false,
-                            data_title: "Summary",
+                            isCompleted: lesson.summary?.isCompleted ?? false,
+                            dataTitle: "Summary",
                           );
                         } else {
                           return Container();
@@ -192,11 +192,11 @@ class LessonPage extends StatelessWidget {
   }
 
   Row selectedLesson(
-      {required bool is_completed,
-      String? data_url,
-      String? data_exp,
-      String? data_point,
-      required String data_title,
+      {required bool isCompleted,
+      String? dataUrl,
+      String? dataExp,
+      String? dataPoint,
+      required String dataTitle,
       required VoidCallback navigasi}) {
     return Row(
       children: [
@@ -205,12 +205,12 @@ class LessonPage extends StatelessWidget {
           width: 20,
           margin: const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
-              color: is_completed == true ? Warna.benar : Warna.netral6,
+              color: isCompleted == true ? Warna.benar : Warna.netral6,
               shape: BoxShape.circle),
           child: Align(
             alignment: Alignment.center,
             child: Icon(
-              is_completed == true ? Icons.check : Icons.close,
+              isCompleted == true ? Icons.check : Icons.close,
               color: Warna.primary1,
               size: 16,
             ),
@@ -255,8 +255,8 @@ class LessonPage extends StatelessWidget {
                     height: 56,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: data_url != null
-                                ? NetworkImage(data_url)
+                            image: dataUrl != null
+                                ? NetworkImage(dataUrl)
                                 : const AssetImage(
                                         "assets/images/Rectangle 11.png")
                                     as ImageProvider)),
@@ -270,7 +270,7 @@ class LessonPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Tipografi()
-                            .S1(isiText: data_title, warnaFont: Warna.primary4),
+                            .s1(isiText: dataTitle, warnaFont: Warna.primary4),
                         const SizedBox(
                           height: 5,
                         ),
@@ -282,8 +282,8 @@ class LessonPage extends StatelessWidget {
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                Tipografi().B2(
-                                    isiText: "${data_exp ?? '0'} EXP",
+                                Tipografi().b2(
+                                    isiText: "${dataExp ?? '0'} EXP",
                                     warnaFont: Warna.netral1)
                               ],
                             ),
@@ -296,8 +296,8 @@ class LessonPage extends StatelessWidget {
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                Tipografi().B2(
-                                    isiText: data_point ?? '0',
+                                Tipografi().b2(
+                                    isiText: dataPoint ?? '0',
                                     warnaFont: Warna.netral1)
                               ],
                             ),

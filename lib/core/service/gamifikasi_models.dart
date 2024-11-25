@@ -12,7 +12,6 @@ class GamifikasiModels {
 
     if (respons.statusCode == 200) {
       final jsonData = jsonDecode(respons.body);
-      print(respons.body);
       return GamifikasiApi.fromJson(jsonData['data']);
     } else {
       return null;

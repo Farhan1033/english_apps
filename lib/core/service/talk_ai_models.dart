@@ -10,7 +10,6 @@ class TalkAiModels {
         Uri.parse('http://${Localhost.localhost}/chatAI'),
         headers: {'Authorization': 'Bearer $token'},
         body: jsonEncode({'sentence': sentence}));
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return TalkAiApi.fromJson(jsonData);

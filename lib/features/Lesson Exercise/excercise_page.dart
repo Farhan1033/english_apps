@@ -20,7 +20,6 @@ class _ExcercisePageState extends State<ExcercisePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final idExcercise = ModalRoute.of(context)?.settings.arguments.toString();
@@ -36,7 +35,7 @@ class _ExcercisePageState extends State<ExcercisePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Tipografi().S1(isiText: "Excercise", warnaFont: Warna.primary1),
+        title: Tipografi().s1(isiText: "Excercise", warnaFont: Warna.primary1),
         iconTheme: const IconThemeData(color: Warna.primary1),
         backgroundColor: Warna.primary3,
       ),
@@ -96,7 +95,7 @@ class _ExcercisePageState extends State<ExcercisePage> {
                   const SizedBox(height: 20),
                   Align(
                     alignment: Alignment.bottomRight,
-                    child: Tombol().PrimaryLarge(
+                    child: Tombol().primaryLarge(
                         teksTombol: excerciseProvider.currentIndex + 1 <
                                 excerciseProvider.exerciseApi!.quiz!.length
                             ? "Next"
@@ -171,7 +170,7 @@ class _ExcercisePageState extends State<ExcercisePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Tipografi().H6(
+                Tipografi().h6(
                   isiText: exerciseProvider.totalGrade! >= 75
                       ? 'Good job'
                       : 'Try Again',
@@ -180,13 +179,13 @@ class _ExcercisePageState extends State<ExcercisePage> {
                 const SizedBox(height: 10),
                 Image.asset('assets/images/Clip path group.png'),
                 const SizedBox(height: 10),
-                Tipografi().S1(
+                Tipografi().s1(
                   isiText: 'Score: ${exerciseProvider.totalGrade}',
                   warnaFont: Warna.netral1,
                 ),
                 const SizedBox(height: 10),
                 if (exerciseProvider.totalGrade! < 75)
-                  Tombol().PrimarySmall(
+                  Tombol().primarySmall(
                     teksTombol: 'Retry',
                     lebarTombol: double.maxFinite,
                     navigasiTombol: () {
@@ -198,14 +197,16 @@ class _ExcercisePageState extends State<ExcercisePage> {
                     },
                   ),
                 const SizedBox(height: 5),
-                Tombol().OutLineSmall(
+                Tombol().outLineSmall(
                   teksTombol: 'Back To Lesson',
                   lebarTombol: double.maxFinite,
                   navigasiTombol: () {
                     Future.delayed(const Duration(seconds: 2), () {
+                      // ignore: use_build_context_synchronously
                       final lesson = context.read<LessonProvider>();
                       lesson.lessonFetch(lesson.idLesson);
                       Navigator.popUntil(
+                          // ignore: use_build_context_synchronously
                           context, ModalRoute.withName('/lesson'));
                     });
                   },
@@ -307,7 +308,7 @@ class _ExcercisePageState extends State<ExcercisePage> {
           const SizedBox(height: 30),
           Align(
             alignment: Alignment.center,
-            child: Tipografi().B1(
+            child: Tipografi().b1(
               isiText: question ?? 'No Question Available',
               warnaFont: Warna.netral1,
             ),

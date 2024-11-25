@@ -18,7 +18,7 @@ class ChatAiPage extends StatelessWidget {
           backgroundColor: Warna.primary3,
           iconTheme: IconThemeData(color: Warna.primary1),
           title: Tipografi()
-              .S1(isiText: 'Chat With AI', warnaFont: Warna.primary1),
+              .s1(isiText: 'Chat With AI', warnaFont: Warna.primary1),
         ),
         body: Consumer<ChatAiProvider>(
           builder: (context, chatAiProvider, _) {
@@ -43,7 +43,7 @@ class ChatAiPage extends StatelessWidget {
                             color: message.isUserMessage
                                 ? Warna.primary3
                                 : Warna.primary4,
-                            child: Tipografi().B2(
+                            child: Tipografi().b2(
                               isiText: message.text,
                               warnaFont: Warna.primary1,
                             ),

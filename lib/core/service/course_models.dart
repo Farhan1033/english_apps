@@ -10,7 +10,6 @@ class CourseService {
         Uri.parse(
             "http://${Localhost.localhost}/courses?coursename=speaking&coursecategory=$categoryCourses"),
         headers: {'Authorization': 'Bearer $tokenCourse'});
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       return CourseApi.fromJson(jsonData['data']);

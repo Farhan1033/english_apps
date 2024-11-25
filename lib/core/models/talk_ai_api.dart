@@ -12,10 +12,10 @@ class TalkAiApi {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['answer'] = this.answer;
-    data['fix'] = this.fix;
-    data['is_correct'] = this.isCorrect;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['answer'] = answer;
+    data['fix'] = fix;
+    data['is_correct'] = isCorrect;
     return data;
   }
 }

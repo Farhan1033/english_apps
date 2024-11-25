@@ -24,7 +24,7 @@ class SummaryPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Warna.primary3,
         iconTheme: const IconThemeData(color: Warna.primary1),
-        title: Tipografi().S1(isiText: 'Summary', warnaFont: Warna.primary1),
+        title: Tipografi().s1(isiText: 'Summary', warnaFont: Warna.primary1),
       ),
       body: Consumer<SummaryProvider>(builder: (context, summaryProvider, _) {
         if (summaryProvider.isLoading) {
@@ -64,7 +64,7 @@ class SummaryPage extends StatelessWidget {
                       child: summaryApi.url != null
                           ? SfPdfViewer.network('${summaryApi.url}')
                           : Center(
-                              child: Tipografi().S1(
+                              child: Tipografi().s1(
                                 isiText: "File Belum Tersedia",
                                 warnaFont: Warna.netral1,
                               ),
@@ -72,7 +72,7 @@ class SummaryPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 15),
-                  Tombol().PrimaryLarge(
+                  Tombol().primaryLarge(
                     teksTombol: 'Done',
                     lebarTombol: double.maxFinite,
                     navigasiTombol: () {
@@ -83,6 +83,7 @@ class SummaryPage extends StatelessWidget {
                         Future.delayed(const Duration(seconds: 2), () {
                           lesson.lessonFetch(lesson.idLesson);
                           Navigator.popUntil(
+                              // ignore: use_build_context_synchronously
                               context, ModalRoute.withName('/lesson'));
                         });
                       } else {

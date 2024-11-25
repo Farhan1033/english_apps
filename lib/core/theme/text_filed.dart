@@ -37,7 +37,6 @@ class AreaTeks {
     return TextFormField(
       controller: editingController,
       maxLines: null,
-
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(

@@ -11,15 +11,15 @@ class AnalysisDetailApi {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
-    data['status_code'] = this.statusCode;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
+    data['status_code'] = statusCode;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -40,17 +40,17 @@ class Data {
     if (json['progress'] != null) {
       progress = <Progress>[];
       json['progress'].forEach((v) {
-        progress!.add(new Progress.fromJson(v));
+        progress!.add(Progress.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['course'] = this.course;
-    data['description'] = this.description;
-    if (this.progress != null) {
-      data['progress'] = this.progress!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['course'] = course;
+    data['description'] = description;
+    if (progress != null) {
+      data['progress'] = progress!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -68,9 +68,9 @@ class Progress {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category'] = this.category;
-    data['progress_percentage'] = this.progressPercentage;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['category'] = category;
+    data['progress_percentage'] = progressPercentage;
     return data;
   }
 }

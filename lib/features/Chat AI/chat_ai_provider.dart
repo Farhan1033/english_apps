@@ -10,7 +10,7 @@ class ChatAiProvider with ChangeNotifier {
   final TalkAiModels _talkAiModels = TalkAiModels();
   final TextEditingController _userChatController = TextEditingController();
 
-  List<Message> _messages = [];
+  final List<Message> _messages = [];
 
   List<Message> get messages => _messages;
 

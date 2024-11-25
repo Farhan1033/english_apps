@@ -15,7 +15,6 @@ class LoginProvider with ChangeNotifier {
     loginState.setError(false);
 
     final loginData = await _loginService.loginUser(email, password);
-
     if (loginData != null) {
       loginState.setLoginData(loginData);
       _token.saveToken(loginData.token ?? "Token Tidak Ditemukan");

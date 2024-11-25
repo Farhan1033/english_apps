@@ -14,7 +14,7 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Warna.primary3,
         title:
-            Tipografi().S1(isiText: 'Profile Page', warnaFont: Warna.primary1),
+            Tipografi().s1(isiText: 'Profile Page', warnaFont: Warna.primary1),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -35,11 +35,11 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              Tipografi().H6(isiText: 'Morgan Bruem', warnaFont: Warna.netral1),
+              Tipografi().h6(isiText: 'Morgan Bruem', warnaFont: Warna.netral1),
               const SizedBox(
                 height: 15,
               ),
-              Tombol().PrimaryLarge(
+              Tombol().primaryLarge(
                   teksTombol: 'Edit Profile',
                   lebarTombol: double.infinity,
                   navigasiTombol: () {}),
@@ -115,7 +115,7 @@ class ProfilePage extends StatelessWidget {
             const SizedBox(
               width: 15,
             ),
-            Tipografi().S2(isiText: title, warnaFont: Warna.netral1)
+            Tipografi().s2(isiText: title, warnaFont: Warna.netral1)
           ],
         ),
       ),

@@ -18,12 +18,12 @@ class RegisterApi {
     role = json['role'];
   }
 
-  Map<String, dynamic> ToJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['username'] = this.username; 
-    data['email'] = this.email; 
-    data['password'] = this.password; 
-    data['role'] = this.role; 
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['username'] = username; 
+    data['email'] = email; 
+    data['password'] = password; 
+    data['role'] = role; 
     return data;
   }
 }

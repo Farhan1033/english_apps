@@ -5,74 +5,75 @@ import 'package:flutter/material.dart';
 var tipografri = Tipografi();
 
 class Tombol {
-  Widget PrimaryLarge(
+  Widget primaryLarge(
       {required String teksTombol,
       required double lebarTombol,
       required VoidCallback navigasiTombol}) {
     return ElevatedButton(
         onPressed: navigasiTombol,
         style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            fixedSize: MaterialStatePropertyAll(Size(lebarTombol, 51)),
-            backgroundColor: MaterialStatePropertyAll(Warna.primary3),
-            overlayColor: MaterialStatePropertyAll(Warna.primary4)),
-        child: tipografri.FontButton(
+            fixedSize: WidgetStatePropertyAll(Size(lebarTombol, 51)),
+            backgroundColor: WidgetStatePropertyAll(Warna.primary3),
+            overlayColor: WidgetStatePropertyAll(Warna.primary4)),
+        child: tipografri.fontButton(
             isiText: teksTombol, warnaFont: Warna.primary1));
   }
 
-  Widget PrimarySmall(
+  Widget primarySmall(
       {required String teksTombol,
       required double lebarTombol,
       required VoidCallback navigasiTombol}) {
     return ElevatedButton(
         onPressed: navigasiTombol,
         style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            fixedSize: MaterialStatePropertyAll(Size(lebarTombol, 36)),
-            backgroundColor: MaterialStatePropertyAll(Warna.primary3),
-            overlayColor: MaterialStatePropertyAll(Warna.primary4)),
-        child: tipografri.FontButton(
+            fixedSize: WidgetStatePropertyAll(Size(lebarTombol, 36)),
+            backgroundColor: WidgetStatePropertyAll(Warna.primary3),
+            overlayColor: WidgetStatePropertyAll(Warna.primary4)),
+        child: tipografri.fontButton(
             isiText: teksTombol, warnaFont: Warna.primary1));
   }
 
-  Widget OutLineLarge(
+  Widget outLineLarge(
       {required String teksTombol,
       required double lebarTombol,
       required VoidCallback navigasiTombol}) {
     return ElevatedButton(
         onPressed: navigasiTombol,
         style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            fixedSize: MaterialStatePropertyAll(Size(lebarTombol, 51)),
-            side: MaterialStatePropertyAll(BorderSide(color: Warna.primary3)),
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
+            fixedSize: WidgetStatePropertyAll(Size(lebarTombol, 51)),
+            side: WidgetStatePropertyAll(BorderSide(color: Warna.primary3)),
+            backgroundColor: WidgetStatePropertyAll(Colors.white),
             overlayColor:
-                MaterialStatePropertyAll(Warna.primary4.withOpacity(0.5))),
-        child: tipografri.FontButton(
+                WidgetStatePropertyAll(Warna.primary4.withOpacity(0.5))),
+        child: tipografri.fontButton(
             isiText: teksTombol, warnaFont: Warna.primary3));
   }
 
-  Widget OutLineSmall(
+  Widget outLineSmall(
       {required String teksTombol,
       required double lebarTombol,
       required VoidCallback navigasiTombol}) {
     return ElevatedButton(
         onPressed: navigasiTombol,
         style: ButtonStyle(
-            shape: MaterialStatePropertyAll(
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            fixedSize: MaterialStatePropertyAll(Size(lebarTombol, 36)),
-            side: MaterialStatePropertyAll(BorderSide(color: Warna.primary3)),
-            backgroundColor: MaterialStatePropertyAll(Colors.white),
+            fixedSize: WidgetStatePropertyAll(Size(lebarTombol, 36)),
+            side: WidgetStatePropertyAll(BorderSide(color: Warna.primary3)),
+            backgroundColor: WidgetStatePropertyAll(Colors.white),
             overlayColor:
-                MaterialStatePropertyAll(Warna.primary4.withOpacity(0.5))),
-        child: tipografri.FontButton(
+                WidgetStatePropertyAll(Warna.primary4.withOpacity(0.5))),
+        child: tipografri.fontButton(
             isiText: teksTombol, warnaFont: Warna.primary3));
   }
 
+  // ignore: non_constant_identifier_names
   Widget TextLarge(
       {required String teksTombol,
       required double lebarTombol,
@@ -80,12 +81,12 @@ class Tombol {
     return TextButton(
         onPressed: navigasiTombol,
         style: ButtonStyle(
-            fixedSize: MaterialStatePropertyAll(Size(lebarTombol, 51)),
-            shape: MaterialStatePropertyAll(
+            fixedSize: WidgetStatePropertyAll(Size(lebarTombol, 51)),
+            shape: WidgetStatePropertyAll(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
             overlayColor:
-                MaterialStatePropertyAll(Warna.primary4.withOpacity(0.2))),
-        child: tipografri.FontButton(
+                WidgetStatePropertyAll(Warna.primary4.withOpacity(0.2))),
+        child: tipografri.fontButton(
             isiText: teksTombol, warnaFont: Warna.primary3));
   }
 }
